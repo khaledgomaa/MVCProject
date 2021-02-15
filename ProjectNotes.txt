@@ -1,0 +1,111 @@
+-User --> Anyone using our system 
+-UserRoles ---> can be managed by Identity
+
+
+-Stadium
+	OwnerId, ---> UserId (foreign key)
+	StadiumId,
+	Name
+	Country,
+	City,
+	StadiumArea,
+	NumOfPlayers
+	Ball ---- > ballType enum
+	StadiumTimes -->  one to many
+	AMPrice
+	PMPrice
+	services ---> enum [flags] byte
+	Rate (only if booked before)
+	Status ---> enum (Available - Busy)
+	IsOffered,
+	Date
+
+StadiumRate
+	UserId,
+	StadiumId,
+	Rate,	
+
+
+-StadiumTimes
+	TimeId , StadiumId , from , to , state(AM/PM)
+
+Booking
+	BookingId,
+	UserId,
+	StadiumId,
+	TimeId --> Foriegn Key ,
+	price,
+	Date,
+	Status(Public - Private) ,
+	MaxNumOfPlayers (Islam restriction)
+
+BookingTeam
+	BookingID
+	UserID
+
+
+-Page after bookings
+
+Subscriber --> anyone can subscribe to newsletter
+	Id,
+	Email
+
+Notifications
+	Id,
+	UserId,
+	Title,
+	Body
+
+-Contacts
+	Facebok,
+	Phone,
+	Twitter,
+	Insta
+
+ContactUs
+	Name,
+	Email,
+	Phone,
+	Message
+
+-News
+	id,
+	Name,
+	Image,
+	Description
+
+-About
+
+Registeration (User , Owner) + Login with (Google , Facebook) ---> Hajer + Nada
++ Profile (User --> (manage info - Bookings(cancel before 24 hours only - edit)) , Owner includes his stadiums)
+
+Home Page ( SlideShow(Related Images) , offers , news ) ---> Shawky
+
+All Stadiums (Show all Stadiums categorised by Country , way to filter by (city , name , date , state) ---> Islam
+
+Book a stadium (A page to display stadium details and button to book the stadium) + Contact us ---> Khaled
+
+--Add Notifications
+
+Contacts ---> in footer
+About us ---> page --> contacts
+
+
+
+Dashboard
+
+Home Page (contains some statistics like #users , #onwers , #bookings) + Manage Users, ---> Nada
+
+Manage Stadiums, ---> Islam
+
+Manage Owners, + Send Notification to one or many users, --->  Hajer
+
+Manage Bookings, ---> Khaled
+
+Send E-mails to one or many users + ContactUs ---> Shawky
+
+
+
+
+--Future Feature :-
+	Enables admin , owner to block user from booking the stadium
