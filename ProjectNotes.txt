@@ -94,7 +94,7 @@ About us ---> page --> contacts
 
 Dashboard
 
-Home Page (contains some statistics like #users , #onwers , #bookings) + Manage Users, ---> Nada
+DashBoard (contains some statistics like #users , #onwers , #bookings) + Manage Users, ---> Nada
 
 Manage Stadiums, ---> Islam
 
