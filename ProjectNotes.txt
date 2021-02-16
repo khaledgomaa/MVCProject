@@ -6,11 +6,9 @@
 	OwnerId, ---> UserId (foreign key)
 	StadiumId,
 	Name
-	Country,
 	City,
 	StadiumArea,
 	NumOfPlayers
-	Ball ---- > ballType enum
 	StadiumTimes -->  one to many
 	AMPrice
 	PMPrice

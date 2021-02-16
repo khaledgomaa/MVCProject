@@ -1,0 +1,2 @@
+git checkout "branchName" (Don't play with main branch please)
+git status --> to check modified files
