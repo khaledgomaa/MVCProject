@@ -1,2 +1,16 @@
-git checkout "branchName" (Don't play with main branch please)
+*First Step to download project*
+git clone https://github.com/khaledgomaa/MVCProject.git
 git status --> to check modified files
+
+*To create new branch with develop updates*
+1- git checkout develop
+2- git pull origin develop --> get new changes from remote server
+2- git checkout -b "name of new branch"
+
+
+*To upload local changes to remote server*
+1 - git add . --> to add all changes
+2 - git commit -m "any name" 
+3- git push origin "branchName" --> to add new changes to remote serber
+
+git log --> get all commits
