@@ -88,7 +88,7 @@ Book a stadium (A page to display stadium details and button to book the stadium
 Contacts ---> in footer
 About us ---> page --> contacts
 
-
+--Payment (paypal) ---> 
 
 Dashboard
 

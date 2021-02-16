@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using La3bni.Repository;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
@@ -15,8 +16,7 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<BookingTeam>().HasKey(b => new { b.ApplicationUserId, b.BookingId });
-            builder.Entity<PlaygroundRate>().HasKey(s => new { s.ApplicationUserId, s.PlaygroundId });
+            builder.ApplyConfigurationsFromAssembly(typeof(EntityConfiguration<>).Assembly);
             base.OnModelCreating(builder);
         }
     }
