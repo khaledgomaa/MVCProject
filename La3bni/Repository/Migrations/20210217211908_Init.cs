@@ -48,6 +48,50 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FeedBacks",
+                columns: table => new
+                {
+                    FeedBackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedBacks", x => x.FeedBackId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    NewsId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.NewsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Subscribers",
+                columns: table => new
+                {
+                    SubscriberId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subscribers", x => x.SubscriberId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -154,7 +198,28 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Playground",
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationId);
+                    table.ForeignKey(
+                        name: "FK_Notifications_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Playgrounds",
                 columns: table => new
                 {
                     PlaygroundId = table.Column<int>(type: "int", nullable: false)
@@ -174,9 +239,9 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Playground", x => x.PlaygroundId);
+                    table.PrimaryKey("PK_Playgrounds", x => x.PlaygroundId);
                     table.ForeignKey(
-                        name: "FK_Playground_AspNetUsers_ApplicationUserId",
+                        name: "FK_Playgrounds_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -184,7 +249,7 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlaygroundRate",
+                name: "PlaygroundRates",
                 columns: table => new
                 {
                     ApplicationUserId = table.Column<int>(type: "int", nullable: false),
@@ -194,17 +259,17 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlaygroundRate", x => new { x.ApplicationUserId, x.PlaygroundId });
+                    table.PrimaryKey("PK_PlaygroundRates", x => new { x.ApplicationUserId, x.PlaygroundId });
                     table.ForeignKey(
-                        name: "FK_PlaygroundRate_AspNetUsers_ApplicationUserId1",
+                        name: "FK_PlaygroundRates_AspNetUsers_ApplicationUserId1",
                         column: x => x.ApplicationUserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PlaygroundRate_Playground_PlaygroundId",
+                        name: "FK_PlaygroundRates_Playgrounds_PlaygroundId",
                         column: x => x.PlaygroundId,
-                        principalTable: "Playground",
+                        principalTable: "Playgrounds",
                         principalColumn: "PlaygroundId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -224,15 +289,15 @@ namespace Repository.Migrations
                 {
                     table.PrimaryKey("PK_PlaygroundTimes", x => x.PlaygroundTimesId);
                     table.ForeignKey(
-                        name: "FK_PlaygroundTimes_Playground_PlaygroundId",
+                        name: "FK_PlaygroundTimes_Playgrounds_PlaygroundId",
                         column: x => x.PlaygroundId,
-                        principalTable: "Playground",
+                        principalTable: "Playgrounds",
                         principalColumn: "PlaygroundId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "Bookings",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
@@ -247,21 +312,21 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.BookingId);
+                    table.PrimaryKey("PK_Bookings", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Booking_AspNetUsers_ApplicationUserId",
+                        name: "FK_Bookings_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Booking_Playground_PlaygroundId",
+                        name: "FK_Bookings_Playgrounds_PlaygroundId",
                         column: x => x.PlaygroundId,
-                        principalTable: "Playground",
+                        principalTable: "Playgrounds",
                         principalColumn: "PlaygroundId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Booking_PlaygroundTimes_PlaygroundTimesId",
+                        name: "FK_Bookings_PlaygroundTimes_PlaygroundTimesId",
                         column: x => x.PlaygroundTimesId,
                         principalTable: "PlaygroundTimes",
                         principalColumn: "PlaygroundTimesId",
@@ -269,7 +334,7 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookingTeam",
+                name: "BookingTeams",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false),
@@ -277,17 +342,17 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookingTeam", x => new { x.ApplicationUserId, x.BookingId });
+                    table.PrimaryKey("PK_BookingTeams", x => new { x.ApplicationUserId, x.BookingId });
                     table.ForeignKey(
-                        name: "FK_BookingTeam_AspNetUsers_ApplicationUserId",
+                        name: "FK_BookingTeams_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookingTeam_Booking_BookingId",
+                        name: "FK_BookingTeams_Bookings_BookingId",
                         column: x => x.BookingId,
-                        principalTable: "Booking",
+                        principalTable: "Bookings",
                         principalColumn: "BookingId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -332,39 +397,44 @@ namespace Repository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_ApplicationUserId",
-                table: "Booking",
+                name: "IX_Bookings_ApplicationUserId",
+                table: "Bookings",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_PlaygroundId",
-                table: "Booking",
+                name: "IX_Bookings_PlaygroundId",
+                table: "Bookings",
                 column: "PlaygroundId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_PlaygroundTimesId",
-                table: "Booking",
+                name: "IX_Bookings_PlaygroundTimesId",
+                table: "Bookings",
                 column: "PlaygroundTimesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingTeam_BookingId",
-                table: "BookingTeam",
+                name: "IX_BookingTeams_BookingId",
+                table: "BookingTeams",
                 column: "BookingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Playground_ApplicationUserId",
-                table: "Playground",
+                name: "IX_Notifications_ApplicationUserId",
+                table: "Notifications",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlaygroundRate_ApplicationUserId1",
-                table: "PlaygroundRate",
+                name: "IX_PlaygroundRates_ApplicationUserId1",
+                table: "PlaygroundRates",
                 column: "ApplicationUserId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlaygroundRate_PlaygroundId",
-                table: "PlaygroundRate",
+                name: "IX_PlaygroundRates_PlaygroundId",
+                table: "PlaygroundRates",
                 column: "PlaygroundId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Playgrounds_ApplicationUserId",
+                table: "Playgrounds",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlaygroundTimes_PlaygroundId",
@@ -390,22 +460,34 @@ namespace Repository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookingTeam");
+                name: "BookingTeams");
 
             migrationBuilder.DropTable(
-                name: "PlaygroundRate");
+                name: "FeedBacks");
+
+            migrationBuilder.DropTable(
+                name: "News");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "PlaygroundRates");
+
+            migrationBuilder.DropTable(
+                name: "Subscribers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "PlaygroundTimes");
 
             migrationBuilder.DropTable(
-                name: "Playground");
+                name: "Playgrounds");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

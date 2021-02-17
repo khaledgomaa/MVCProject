@@ -31,6 +31,10 @@ namespace La3bni.UI
             services.AddDbContext<La3bniContext>(options => options.UseSqlServer(configuration.GetConnectionString("La3bniCon")));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<ImageManager, ImageManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

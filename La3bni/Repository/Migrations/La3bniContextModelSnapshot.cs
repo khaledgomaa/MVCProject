@@ -254,7 +254,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("PlaygroundTimesId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Models.BookingTeam", b =>
@@ -269,7 +269,83 @@ namespace Repository.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.ToTable("BookingTeam");
+                    b.ToTable("BookingTeams");
+                });
+
+            modelBuilder.Entity("Models.FeedBack", b =>
+                {
+                    b.Property<int>("FeedBackId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FeedBackId");
+
+                    b.ToTable("FeedBacks");
+                });
+
+            modelBuilder.Entity("Models.News", b =>
+                {
+                    b.Property<int>("NewsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsId");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("Models.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Models.Playground", b =>
@@ -320,7 +396,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Playground");
+                    b.ToTable("Playgrounds");
                 });
 
             modelBuilder.Entity("Models.PlaygroundRate", b =>
@@ -343,7 +419,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("PlaygroundId");
 
-                    b.ToTable("PlaygroundRate");
+                    b.ToTable("PlaygroundRates");
                 });
 
             modelBuilder.Entity("Models.PlaygroundTimes", b =>
@@ -370,6 +446,22 @@ namespace Repository.Migrations
                     b.HasIndex("PlaygroundId");
 
                     b.ToTable("PlaygroundTimes");
+                });
+
+            modelBuilder.Entity("Models.Subscriber", b =>
+                {
+                    b.Property<int>("SubscriberId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubscriberId");
+
+                    b.ToTable("Subscribers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -463,6 +555,15 @@ namespace Repository.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("Models.Notification", b =>
+                {
+                    b.HasOne("Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Models.Playground", b =>

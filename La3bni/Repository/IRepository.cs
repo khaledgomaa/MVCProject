@@ -12,12 +12,12 @@ namespace Repository
 
         public Task<TEntity> Find(Expression<Func<TEntity, bool>> wherePredict);
 
-        public int Add(TEntity entity);
+        public void Add(TEntity entity);
 
-        public int AddRange(List<TEntity> entities);
+        public void AddRange(List<TEntity> entities);
 
-        public int Delete(TEntity entity);
+        public void Delete(TEntity entity);
 
-        public int SaveChanges();
+        public void Update(TEntity entityToUpdate);
     }
 }

@@ -14,6 +14,24 @@ namespace Repository
         {
         }
 
+        public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<Playground> Playgrounds { get; set; }
+
+        public DbSet<BookingTeam> BookingTeams { get; set; }
+
+        public DbSet<FeedBack> FeedBacks { get; set; }
+
+        public DbSet<News> News { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<PlaygroundRate> PlaygroundRates { get; set; }
+
+        public DbSet<PlaygroundTimes> PlaygroundTimes { get; set; }
+
+        public DbSet<Subscriber> Subscribers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(EntityConfiguration<>).Assembly);

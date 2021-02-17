@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repository;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace La3bni.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public IRepository<Booking> BookingRepo;
-
-        public HomeController(IRepository<Booking> _BookingRepo)
+        public HomeController()
         {
-            BookingRepo = _BookingRepo;
         }
 
         public IActionResult Index()

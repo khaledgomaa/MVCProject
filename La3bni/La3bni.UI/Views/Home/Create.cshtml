@@ -1,0 +1,69 @@
+﻿@model Models.Booking
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @**********************Read It********************************@
+        @*To enable IFormFile Add this line (enctype="multipart/form-data") *@
+
+        <form asp-action="Create" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicationUserId" class="control-label"></label>
+                <select asp-for="ApplicationUserId" class="form-control" asp-items="ViewBag.ApplicationUserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaygroundId" class="control-label"></label>
+                <select asp-for="PlaygroundId" class="form-control" asp-items="ViewBag.PlaygroundId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaygroundTimesId" class="control-label"></label>
+                <select asp-for="PlaygroundTimesId" class="form-control" asp-items="ViewBag.PlaygroundTimesId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookedDate" class="control-label"></label>
+                <input asp-for="BookedDate" class="form-control" />
+                <span asp-validation-for="BookedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingStatus" class="control-label"></label>
+                <select asp-for="BookingStatus" class="form-control"></select>
+                <span asp-validation-for="BookingStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxNumOfPlayers" class="control-label"></label>
+                <input asp-for="MaxNumOfPlayers" class="form-control" />
+                <span asp-validation-for="MaxNumOfPlayers" class="text-danger"></span>
+            </div>
+
+            @*IFormFile -------->*@
+            @*<div class="form-group">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input asp-for="ImageFile" accept="image/*" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

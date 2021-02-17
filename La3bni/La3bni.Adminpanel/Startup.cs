@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,11 @@ namespace La3bni.Adminpanel
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Images")))
+            {
+                Directory.CreateDirectory("Images");
+            }
 
             app.UseEndpoints(endpoints =>
             {

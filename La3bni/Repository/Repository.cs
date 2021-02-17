@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -10,43 +9,43 @@ namespace Repository
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly La3bniContext la3BniContext;
+        private readonly DbSet<TEntity> dbSet;
 
         public Repository(La3bniContext _la3BniContext)
         {
             la3BniContext = _la3BniContext;
+            dbSet = la3BniContext.Set<TEntity>();
         }
 
-        public int Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
-            la3BniContext.Set<TEntity>().Add(entity);
-            return SaveChanges();
+            dbSet.Add(entity);
         }
 
-        public int AddRange(List<TEntity> entities)
+        public virtual void AddRange(List<TEntity> entities)
         {
-            la3BniContext.Set<TEntity>().AddRange(entities);
-            return SaveChanges();
+            dbSet.AddRange(entities);
         }
 
-        public int Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             la3BniContext.Entry(entity).State = EntityState.Deleted;
-            return SaveChanges();
         }
 
-        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> wherePredict)
+        public virtual async Task<TEntity> Find(Expression<Func<TEntity, bool>> wherePredict)
         {
-            return await la3BniContext.Set<TEntity>().FirstOrDefaultAsync(wherePredict);
+            return await dbSet.FirstOrDefaultAsync(wherePredict);
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
-            return await la3BniContext.Set<TEntity>().ToListAsync();
+            return await dbSet.ToListAsync();
         }
 
-        public int SaveChanges()
+        public virtual void Update(TEntity entityToUpdate)
         {
-            return la3BniContext.SaveChanges();
+            dbSet.Attach(entityToUpdate);
+            la3BniContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
     }
 }
