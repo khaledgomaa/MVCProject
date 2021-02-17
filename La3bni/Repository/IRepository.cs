@@ -17,5 +17,7 @@ namespace Repository
         public int AddRange(List<TEntity> entities);
 
         public int Delete(TEntity entity);
+
+        public int SaveChanges();
     }
 }

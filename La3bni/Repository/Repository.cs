@@ -19,19 +19,19 @@ namespace Repository
         public int Add(TEntity entity)
         {
             la3BniContext.Set<TEntity>().Add(entity);
-            return la3BniContext.SaveChanges();
+            return SaveChanges();
         }
 
         public int AddRange(List<TEntity> entities)
         {
             la3BniContext.Set<TEntity>().AddRange(entities);
-            return la3BniContext.SaveChanges();
+            return SaveChanges();
         }
 
         public int Delete(TEntity entity)
         {
             la3BniContext.Entry(entity).State = EntityState.Deleted;
-            return la3BniContext.SaveChanges();
+            return SaveChanges();
         }
 
         public async Task<TEntity> Find(Expression<Func<TEntity, bool>> wherePredict)
@@ -42,6 +42,11 @@ namespace Repository
         public async Task<List<TEntity>> GetAll()
         {
             return await la3BniContext.Set<TEntity>().ToListAsync();
+        }
+
+        public int SaveChanges()
+        {
+            return la3BniContext.SaveChanges();
         }
     }
 }
