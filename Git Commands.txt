@@ -1,6 +1,8 @@
 *First Step to download project*
 git clone https://github.com/khaledgomaa/MVCProject.git
+
 git status --> to check modified files
+git branch --> to see all branches on local and remote server
 
 *To create new branch with develop updates*
 1- git checkout develop
