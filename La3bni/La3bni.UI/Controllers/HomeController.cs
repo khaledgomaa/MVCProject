@@ -29,6 +29,7 @@ namespace La3bni.UI.Controllers
                  email.Message + "\n\nFrom : " + email.Name + "\n" + email.UserEmail,
                  new List<string>() { "mohmedshawky2019@gmail.com" });
 
+            //This is Example of using send email and give it a list of recievers
             //EmailService.sendEmail(
             //    "La3bniKoora Business ",
             //    "Advertise with Playground We are planning for another great year as your go - to resource for information on play structures," +
@@ -49,12 +50,10 @@ namespace La3bni.UI.Controllers
         {
             return View();
         }
-
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Playground playground)
         {
