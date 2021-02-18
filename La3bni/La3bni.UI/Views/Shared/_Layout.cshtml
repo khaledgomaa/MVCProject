@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-
+<html>
 <head>
     <title>Introspect by TEMPLATED</title>
     <meta charset="utf-8" />
@@ -195,23 +195,30 @@
         </div>
     </section>-->
     <!-- Footer -->
+    @using La3bni.UI
+    @model Email
     <section id="four">
         <div class="inner">
             <header>
                 <h2>Get in Touch</h2>
             </header>
-            <form method="post" action="#">
-                <div class="field half first">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" />
+
+            <form method="post" asp-action="GetInTouch" asp-controller="Home">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="field half">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="field half">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" />
+                    <label asp-for="UserEmail"></label>
+                    <input asp-for="UserEmail" />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
                 </div>
                 <div class="field">
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" rows="6"></textarea>
+                    <label asp-for="Message"></label>
+                    <textarea asp-for="Message" rows="6"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
                 </div>
                 <ul class="actions">
                     <li><input type="submit" value="Send Message" class="alt" /></li>
@@ -295,9 +302,14 @@
     </footer>
 
     <!-- Scripts -->
+
     <script src="~/assets/js/jquery.min.js"></script>
     <script src="~/assets/js/skel.min.js"></script>
     <script src="~/assets/js/util.js"></script>
     <script src="~/assets/js/main.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
 </body>
 </html>

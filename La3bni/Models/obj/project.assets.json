@@ -811,23 +811,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KhaledGomaa\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Moe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj",
+      "projectUniqueName": "E:\\ITI\\PROJECTS\\04 - ASP Core\\MVCProject\\La3bni\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\KhaledGomaa\\.nuget\\packages\\",
-      "outputPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\obj\\",
+      "projectPath": "E:\\ITI\\PROJECTS\\04 - ASP Core\\MVCProject\\La3bni\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\Moe\\.nuget\\packages\\",
+      "outputPath": "E:\\ITI\\PROJECTS\\04 - ASP Core\\MVCProject\\La3bni\\Models\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\KhaledGomaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Moe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -877,7 +873,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
