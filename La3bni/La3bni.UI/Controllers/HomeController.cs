@@ -44,6 +44,7 @@ namespace La3bni.UI.Controllers
             return View("Index");
         }
 
+
         public IActionResult Index()
         {
             return View();
