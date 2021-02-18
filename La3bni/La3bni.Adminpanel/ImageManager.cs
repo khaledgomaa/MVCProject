@@ -27,7 +27,7 @@ namespace La3bni.UI
                 image = Convert.ToBase64String(fileBytes);
             }
 
-            string path = wwwRootPath + folderName;
+            string path = wwwRootPath + "/" + folderName + "/";
             string base64 = image.Substring(image.IndexOf(',') + 1);
             base64 = base64.Trim('\0');
             byte[] chartData = Convert.FromBase64String(base64);
@@ -58,7 +58,7 @@ namespace La3bni.UI
 
         public void DeleteFile(string folderName)
         {
-            string path = wwwRootPath + folderName;
+            string path = wwwRootPath + "/" + folderName + "/";
             FileInfo file = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
             if (file.Exists)
             {

@@ -155,7 +155,7 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\ru\M
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs

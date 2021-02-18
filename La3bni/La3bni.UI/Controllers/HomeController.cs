@@ -10,12 +10,27 @@ namespace La3bni.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly ImageManager imageManager;
+
+        public HomeController(ImageManager _imageManager)
         {
+            imageManager = _imageManager;
         }
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Playground playground)
+        {
+            imageManager.UploadFile(playground.ImageFile, "Playgrounds");
             return View();
         }
     }
