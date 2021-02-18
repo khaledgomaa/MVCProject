@@ -1,14 +1,33 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
 
-namespace Models
+namespace La3bni.UI
 {
-    public static class ImageManager
+    public class ImageManager
     {
-        private static Random random = new Random();
+        private Random random = new Random();
+        private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly string wwwRootPath;
 
-        public static string UploadFile(string image, string path)
+        public ImageManager(IWebHostEnvironment _webHostEnvironment)
         {
+            webHostEnvironment = _webHostEnvironment;
+            wwwRootPath = webHostEnvironment.WebRootPath;
+        }
+
+        public string UploadFile(IFormFile file, string folderName)
+        {
+            string image = "";
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                image = Convert.ToBase64String(fileBytes);
+            }
+
+            string path = wwwRootPath + folderName;
             string base64 = image.Substring(image.IndexOf(',') + 1);
             base64 = base64.Trim('\0');
             byte[] chartData = Convert.FromBase64String(base64);
@@ -22,7 +41,7 @@ namespace Models
             return imageName;
         }
 
-        public static string UploadVideo(string image, string path, string name)
+        public string UploadVideo(string image, string path, string name)
         {
             string base64 = image.Substring(image.IndexOf(',') + 1);
             base64 = base64.Trim('\0');
@@ -37,8 +56,9 @@ namespace Models
             return path + "/" + imageName;
         }
 
-        public static void DeleteFile(string path)
+        public void DeleteFile(string folderName)
         {
+            string path = wwwRootPath + folderName;
             FileInfo file = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
             if (file.Exists)
             {
