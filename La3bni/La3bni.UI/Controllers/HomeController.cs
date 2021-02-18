@@ -17,6 +17,13 @@ namespace La3bni.UI.Controllers
             imageManager = _imageManager;
         }
 
+
+        public IActionResult GetInTouch(Email email)
+        {
+            EmailService.sendEmail(email);
+            return View("Index");
+        }
+
         public IActionResult Index()
         {
             return View();

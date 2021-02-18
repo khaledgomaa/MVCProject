@@ -7,3 +7,12 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.pdb
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.dll
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.pdb
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.deps.json
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.dll
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.pdb
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfoInputs.cache
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfo.cs
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.dll
+E:\ITI\PROJECTS\04 - ASP Core\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.pdb
