@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.ViewModels;
 using Repository;
@@ -11,11 +12,17 @@ namespace La3bni.UI.Controllers
 {
     public class BookingController : Controller
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public BookingController(IUnitOfWork _unitOfWork)
+        public BookingController(IUnitOfWork _unitOfWork,
+                                UserManager<ApplicationUser> _userManager,
+                                SignInManager<ApplicationUser> _signInManager)
         {
             unitOfWork = _unitOfWork;
+            userManager = _userManager;
+            signInManager = _signInManager;
         }
 
         [Route("Booking/{playGroundId}")]
@@ -35,17 +42,63 @@ namespace La3bni.UI.Controllers
             return View(playGround);
         }
 
-        public async Task<List<Booking>> GetBookings(int playGroundId, string date, string timeId)
+        public async Task<BookingViewModel> GetBookings(int playGroundId, string date, string timeId)
         {
-            return (await unitOfWork.BookingRepo.GetAll())
-                    .Where(b => b.PlaygroundId == playGroundId
-                    && b.BookedDate.Date == Convert.ToDateTime(date).Date
-                    && b.PlaygroundTimesId == int.Parse(timeId)).ToList();
+            //check if user is signed in or not
+            string userId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
+                {
+                    int.TryParse(timeId, out int bookingTimeId);
+                    int bookingId = await CheckBookingNotExist(bookingTimeId, userId, date);
+                    if (bookingId == 0) //0 means no booking found to this user for this parameters
+                    {
+                        var bookings = (await unitOfWork.BookingRepo.GetAll())
+                            .Where(b => b.PlaygroundId == playGroundId
+                            && b.BookedDate.Date == Convert.ToDateTime(date).Date
+                            && b.PlaygroundTimesId == int.Parse(timeId)).ToList();
+
+                        return (new BookingViewModel
+                        {
+                            BookingsCount = bookings.Count,
+                            BookingStatus = bookings.FirstOrDefault()?.BookingStatus ?? BookingStatus.Public,
+                            MaxNumOfPlayers = bookings.FirstOrDefault()?.MaxNumOfPlayers ?? 0,
+                            BookingId = 0
+                        });
+                    }
+                    return new BookingViewModel
+                    {
+                        BookingId = bookingId
+                    };
+                }
+            }
+
+            return new BookingViewModel();
         }
 
-        public IActionResult CreateBooking(string period, int PlaygroundId, DateTime selectedDate, string check)
+        public async Task<int> CheckBookingNotExist(int timeId, string userId, string date)
+        {
+            return (await unitOfWork.BookingRepo.Find(b => b.ApplicationUserId == userId
+                                            && b.BookedDate.Date > DateTime.Now.Date
+                                            && b.BookedDate.Date == Convert.ToDateTime(date).Date
+                                            && b.PlaygroundTimesId == timeId))?.BookingId ?? 0;
+        }
+
+        public IActionResult CreateBooking(string period, int PlaygroundId, string selectedDate)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult CancelBooking(string bookingId)
         {
             return View();
+        }
+
+        private async Task<Status> CheckPlaygroundStatus(int playgroundId)
+        {
+            return (await unitOfWork.PlayGroundRepo.Find(b => b.PlaygroundId == playgroundId)).PlaygroundStatus;
         }
     }
 }

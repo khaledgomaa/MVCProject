@@ -24,27 +24,25 @@
     </div>
 
     <div class="col-md-2">
-        <form asp-action="CreateBooking">
-            <input type="hidden" asp-for="PlaygroundId" />
-            <div class="form-group">
-                <label for="date" class="control-label"></label>
-                <input asp-for="@selectedDate" id="selDate" type="date" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="period" class="control-label">Select period</label>
-                <select name="period" class="form-control" onchange="checkBooking(@Model.PlaygroundId , this)">
-                    @for (int i = 0; i < periods.Count(); i++)
-                    {
-                        <option value="@periods[i].Id">@periods[i].Time</option>
-                    }
-                </select>
-                <label id="message"></label>
-                <input id="check" name="check" type="hidden" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Book" class="btn btn-primary" />
-            </div>
-        </form>
+        <input type="hidden" id="playground" asp-for="PlaygroundId" />
+        <div class="form-group">
+            <label for="date" class="control-label"></label>
+            <input asp-for="@selectedDate" id="selDate" type="date" onchange="checkBooking()" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="period" class="control-label">Select period</label>
+            <select name="period" class="form-control" id="periods" onchange="checkBooking()">
+                @for (int i = 0; i < periods.Count(); i++)
+                {
+                    <option value="@periods[i].Id">@periods[i].Time</option>
+                }
+            </select>
+            <label id="message"></label>
+            <input id="check" name="check" type="hidden" />
+        </div>
+        <div class="form-group">
+            <input type="submit" id="bookBtn" value="Book" onclick="submit(@ViewBag.bookingId)" class="btn btn-primary" />
+        </div>
     </div>
 </div>
 
