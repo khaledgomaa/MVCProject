@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,12 @@ namespace La3bni.UI.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly ImageManager imageManager;
 
-        //private readonly UserManager<ApplicationUser> _userManager;
-        //private readonly SignInManager<ApplicationUser> _signInManager;
-        //public AccountController(  ImageManager _imageManager)
-        //{
-        //    imageManager = _imageManager;
-        //    //_signInManager = signInManager;
-        //    //_userManager = userManager;
-        //}
-
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ImageManager _imageManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             imageManager = _imageManager;
-            //_signInManager = signInManager;
-            //_userManager = userManager;
+            
         }
         [HttpGet]
         public IActionResult Register()
@@ -46,12 +37,14 @@ namespace La3bni.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                imageManager.UploadFile(user.ImageFile, "AppImages");
+             
                 var pp = Request.Form["password"];
                 var created = await userManager.CreateAsync(user, pp);
                 if (created.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    imageManager.UploadFile(user.ImageFile, "AppImages");
+                  
                     return RedirectToAction("myProfile");
                 }
                 foreach (var err in created.Errors)
@@ -59,9 +52,10 @@ namespace La3bni.UI.Controllers
                     ModelState.AddModelError("", err.Description);
                 }
             }
-            return RedirectToAction("Register");
+            return View();
         }
 
+       
         public IActionResult myProfile()
         {
             return View();
