@@ -45,6 +45,9 @@ namespace Models
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
 
+        [Required]
+        public string ImagePath { get; set; }
+
         [NotMapped]
         [DisplayName("Upload Image")]
         public IFormFile ImageFile { get; set; }

@@ -1,0 +1,53 @@
+﻿@model Playground
+@using Models.ViewModels;
+@using Microsoft.Extensions.Configuration;
+@inject IConfiguration config;
+
+@{
+    var periods = (List<PlayGroundTimesViewModel>)ViewBag.times;
+    var selectedDate = DateTime.Now.Date;
+}
+
+<link href="~/assets/css/Booking.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<div class="fullWidth">
+    <img class="center-fit" src="@string.Concat(@config.GetSection("AdminPanelUrl").Value,@Model.ImagePath)" />
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <h1>Overview</h1>
+        <p class="d-block">
+            Finswimming is an underwater sport consisting of four techniques involving swimming with
+            the use of fins either on the water's surface using a snorkel
+        </p>
+    </div>
+
+    <div class="col-md-2">
+        <form asp-action="CreateBooking">
+            <input type="hidden" asp-for="PlaygroundId" />
+            <div class="form-group">
+                <label for="date" class="control-label"></label>
+                <input asp-for="@selectedDate" id="selDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="period" class="control-label">Select period</label>
+                <select name="period" class="form-control" onchange="checkBooking(@Model.PlaygroundId , this)">
+                    @for (int i = 0; i < periods.Count(); i++)
+                    {
+                        <option value="@periods[i].Id">@periods[i].Time</option>
+                    }
+                </select>
+                <label id="message"></label>
+                <input id="check" name="check" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Book" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/BookingJs.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

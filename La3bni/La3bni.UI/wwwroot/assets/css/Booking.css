@@ -1,0 +1,11 @@
+﻿.fullWidth {
+    display: grid;
+    height: 100%;
+}
+
+.center-fit {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 70vh;
+    margin: auto;
+}

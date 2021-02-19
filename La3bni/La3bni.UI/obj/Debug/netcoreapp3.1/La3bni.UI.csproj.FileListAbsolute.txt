@@ -159,3 +159,4 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razo
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Booking\Index.cshtml.g.cs
