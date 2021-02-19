@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj": {}
+    "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj": {}
   },
   "projects": {
-    "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj": {
+    "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\KhaledGomaa\\.nuget\\packages\\",
-        "outputPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\obj\\",
+        "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\HAJER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\KhaledGomaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HAJER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,24 +64,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj": {
+    "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\KhaledGomaa\\.nuget\\packages\\",
-        "outputPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\obj\\",
+        "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\HAJER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\KhaledGomaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HAJER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,8 +92,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj": {
-                "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj"
+              "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj"
               }
             }
           }
@@ -140,7 +134,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

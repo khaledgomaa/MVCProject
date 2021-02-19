@@ -8827,23 +8827,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KhaledGomaa\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\HAJER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\La3bni.UI\\La3bni.UI.csproj",
+      "projectUniqueName": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\La3bni.UI\\La3bni.UI.csproj",
       "projectName": "La3bni.UI",
-      "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\La3bni.UI\\La3bni.UI.csproj",
-      "packagesPath": "C:\\Users\\KhaledGomaa\\.nuget\\packages\\",
-      "outputPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\La3bni.UI\\obj\\",
+      "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\La3bni.UI\\La3bni.UI.csproj",
+      "packagesPath": "C:\\Users\\HAJER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\La3bni.UI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\KhaledGomaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HAJER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8857,11 +8853,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj": {
-              "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Models\\Models.csproj"
+            "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Models\\Models.csproj"
             },
-            "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\Courses\\Intake41\\MVC\\MVCProject\\La3bni\\Repository\\Repository.csproj"
+            "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\Repository\\Repository.csproj"
             }
           }
         }
@@ -8913,7 +8909,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
