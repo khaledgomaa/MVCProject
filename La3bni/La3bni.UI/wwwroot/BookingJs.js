@@ -19,13 +19,12 @@
                         document.getElementById("message").innerText = "This period has beed booked but you can't join sorry :(";
                     }
                 } else if (response.bookingId != 0) { // != 0 in this case user has booked before
-                    document.getElementById("bookBtn").value = "Cancel Book";
+                    document.getElementById("bookBtn").value = "Cancel Booking";
+                } else if (response.playgroundStatus == 1) {
+                    changeBtnandMessageState(true, "We're in maintenance please be patient");
                 } else {
                     document.getElementById("bookBtn").value = "Book";
                 }
-            },
-            error: function (xhr) {
-                //Do Something to handle error
             }
         });
     }
@@ -63,13 +62,16 @@ function checkDateIsValid() {
 
     today = mm + '/' + dd + '/' + yyyy;
     if (new Date(document.getElementById("selDate").value) < new Date(today)) {
-        document.getElementById("bookBtn").disabled = true;
-        document.getElementById("message").innerText = "Please select a valid date";
+        changeBtnandMessageState(true, "Please select a valid date");
         return false;
     }
-    document.getElementById("bookBtn").disabled = false;
-    document.getElementById("message").innerText = "";
+    changeBtnandMessageState(false, "");
     return true;
+}
+
+function changeBtnandMessageState(btnState, message) {
+    document.getElementById("bookBtn").disabled = btnState;
+    document.getElementById("message").innerText = message;
 }
 
 checkBooking();

@@ -10,6 +10,8 @@ namespace Models.ViewModels
 
         public BookingStatus BookingStatus { get; set; }
 
+        public Status PlaygroundStatus { get; set; }
+
         public int MaxNumOfPlayers { get; set; }
 
         public int BookingId { get; set; }

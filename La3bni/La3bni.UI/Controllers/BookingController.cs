@@ -73,6 +73,10 @@ namespace La3bni.UI.Controllers
                         BookingId = bookingId
                     };
                 }
+                return new BookingViewModel
+                {
+                    PlaygroundStatus = Status.Busy
+                };
             }
 
             return new BookingViewModel();
