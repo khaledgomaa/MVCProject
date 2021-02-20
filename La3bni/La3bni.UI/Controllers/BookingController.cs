@@ -175,7 +175,7 @@ namespace La3bni.UI.Controllers
 
         private async Task<Status> CheckPlaygroundStatus(int playgroundId)
         {
-            return (await unitOfWork.PlayGroundRepo.Find(b => b.PlaygroundId == playgroundId)).PlaygroundStatus;
+            return (await unitOfWork.PlayGroundRepo.Find(b => b.PlaygroundId == playgroundId))?.PlaygroundStatus ?? Status.Available;
         }
     }
 }
