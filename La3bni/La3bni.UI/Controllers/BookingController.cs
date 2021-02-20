@@ -55,19 +55,22 @@ namespace La3bni.UI.Controllers
                     int bookingId = await CheckBookingNotExist(bookingTimeId, userId, date);
                     if (bookingId == 0) //0 means no booking found to this user for this parameters
                     {
-                        var bookings = (await unitOfWork.BookingRepo.GetAll())
-                            .Where(b => b.PlaygroundId == playGroundId
+                        var bookings = (await unitOfWork.BookingRepo.Find(
+                            b => b.PlaygroundId == playGroundId
                             && b.BookedDate.Date == Convert.ToDateTime(date).Date
-                            && b.PlaygroundTimesId == int.Parse(timeId)).ToList();
+                            && b.PlaygroundTimesId == int.Parse(timeId)));
 
                         return (new BookingViewModel
                         {
-                            BookingsCount = bookings.Count,
-                            BookingStatus = bookings.FirstOrDefault()?.BookingStatus ?? BookingStatus.Public,
-                            MaxNumOfPlayers = bookings.FirstOrDefault()?.MaxNumOfPlayers ?? 0,
-                            BookingId = 0
+                            NumOfPlayers = (await unitOfWork.BookingTeamRepo.GetAll())
+                                                  .Count(b => b.BookingId == bookings.BookingId),
+                            BookingExist = bookings != null,
+                            BookingStatus = bookings?.BookingStatus ?? BookingStatus.Public,
+                            MaxNumOfPlayers = bookings?.MaxNumOfPlayers ?? 0,
+                            BookingId = bookings?.BookingId ?? 0
                         });
                     }
+
                     return new BookingViewModel
                     {
                         BookingId = bookingId
@@ -90,8 +93,9 @@ namespace La3bni.UI.Controllers
                                             && b.PlaygroundTimesId == timeId))?.BookingId ?? 0;
         }
 
-        public IActionResult CreateBooking(string period, int PlaygroundId, string selectedDate)
+        public IActionResult CreateBooking(string period, int PlaygroundId, string selectedDate, string bookingId)
         {
+            //unitOfWork.BookingRepo.Add()
             return RedirectToAction("Index", "Home");
         }
 

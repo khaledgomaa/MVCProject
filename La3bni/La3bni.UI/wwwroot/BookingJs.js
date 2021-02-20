@@ -1,4 +1,5 @@
-﻿function checkBooking() {
+﻿var teamBookingId = 0;
+function checkBooking() {
     if (checkDateIsValid()) {
         $.ajax({
             url: 'https://localhost:44379/Booking/GetBookings',
@@ -10,13 +11,15 @@
             },
             success: function (response) {
                 console.log(response);
-                if (response.bookingsCount > 0) {
-                    if (response.bookingStatus == 1 && response.bookingsCount < response.maxNumOfPlayers) { //bookingStatus ==1 means it's available
-                        document.getElementById("check").value = 1;
-                        document.getElementById("message").innerText = "This period has beed booked if you'd like to join this team click Book =D";
+                if (response.bookingExist == true) {
+                    if (response.bookingStatus == 1 && response.numOfPlayers < response.maxNumOfPlayers) { //bookingStatus ==1 means it's available
+                        //document.getElementById("check").value = 1;
+                        changeBtnandMessageState(false, "This period has beed booked if you'd like to join this team click Book =D");
+                        teamBookingId = response.bookingId;
+                        console.log(teamBookingId);
                     } else {
-                        document.getElementById("check").value = 0;
-                        document.getElementById("message").innerText = "This period has beed booked but you can't join sorry :(";
+                        //document.getElementById("check").value = 0;
+                        changeBtnandMessageState(true, "This period has beed booked but you can't join sorry :(");
                     }
                 } else if (response.bookingId != 0) { // != 0 in this case user has booked before
                     document.getElementById("bookBtn").value = "Cancel Booking";
@@ -31,6 +34,7 @@
 }
 
 function submit(bookingId) {
+    console.log(teamBookingId);
     if (document.getElementById("bookBtn").value == "Book") {
         console.log("Book");
         $.ajax({
@@ -41,6 +45,7 @@ function submit(bookingId) {
                 period: document.getElementById("periods").value,
                 PlaygroundId: document.getElementById("playground").value,
                 selectedDate: document.getElementById("selDate").value,
+                bookingId: teamBookingId
             },
             success: function (msg) {
                 console.log("Done");

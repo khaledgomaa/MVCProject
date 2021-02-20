@@ -6,7 +6,8 @@ namespace Models.ViewModels
 {
     public class BookingViewModel
     {
-        public int BookingsCount { get; set; }
+        public bool BookingExist { get; set; }
+        public int NumOfPlayers { get; set; }
 
         public BookingStatus BookingStatus { get; set; }
 
