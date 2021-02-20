@@ -32,6 +32,12 @@ namespace Repository
             la3BniContext.Entry(entity).State = EntityState.Deleted;
         }
 
+        public void Delete(List<TEntity> entities)
+        {
+            foreach (TEntity item in entities)
+                la3BniContext.Entry(item).State = EntityState.Deleted;
+        }
+
         public virtual async Task<TEntity> Find(Expression<Func<TEntity, bool>> wherePredict)
         {
             return await dbSet.FirstOrDefaultAsync(wherePredict);

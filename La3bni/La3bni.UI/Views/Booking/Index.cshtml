@@ -10,6 +10,7 @@
 
 <link href="~/assets/css/Booking.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/dialog.css" />
 <div class="fullWidth">
     <img class="center-fit" src="@string.Concat(@config.GetSection("AdminPanelUrl").Value,@Model.ImagePath)" />
 </div>
@@ -23,7 +24,7 @@
         </p>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2" id="bookDetails">
         <input type="hidden" id="playground" asp-for="PlaygroundId" />
         <div class="form-group">
             <label for="date" class="control-label"></label>
@@ -38,14 +39,24 @@
                 }
             </select>
             <label id="message"></label>
-            <input id="check" name="check" type="hidden" />
         </div>
         <div class="form-group">
-            <input type="submit" id="bookBtn" value="Book" onclick="submit(@ViewBag.bookingId)" class="btn btn-primary" />
+            <input type="submit" id="bookBtn" value="Book" onclick="Confirm.render()" class="btn btn-primary" />
         </div>
     </div>
 </div>
 
+<div id="dialogoverlay"></div>
+<div id="dialogbox">
+    <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+    </div>
+</div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/moment.js"></script>
+<script src="~/dialog.js"></script>
 <script src="~/BookingJs.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

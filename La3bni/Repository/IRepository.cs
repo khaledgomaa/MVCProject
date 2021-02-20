@@ -18,6 +18,8 @@ namespace Repository
 
         public void Delete(TEntity entity);
 
+        public void Delete(List<TEntity> entities);
+
         public void Update(TEntity entityToUpdate);
     }
 }

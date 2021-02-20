@@ -25,12 +25,13 @@ namespace La3bni.UI.Controllers
             signInManager = _signInManager;
         }
 
-        [Route("Booking/{playGroundId}")]
-        public async Task<IActionResult> Index(int playGroundId)
+        [Route("Booking/{id}")]
+        [Route("Booking/Index/{id}")]
+        public async Task<IActionResult> Index(int id)
         {
-            Playground playGround = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == playGroundId);
+            Playground playGround = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == id);
             List<PlaygroundTimes> times = (await unitOfWork.PlaygroundTimesRepo.GetAll())
-                                        .Where(t => t.PlaygroundId == playGroundId)
+                                        .Where(t => t.PlaygroundId == id)
                                         .ToList();
 
             ViewBag.times = times.Select(a => new PlayGroundTimesViewModel
@@ -52,18 +53,27 @@ namespace La3bni.UI.Controllers
                 if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
                 {
                     int.TryParse(timeId, out int bookingTimeId);
-                    int bookingId = await CheckBookingNotExist(bookingTimeId, userId, date);
+                    int bookingId = await CheckBookingNotExist(playGroundId, bookingTimeId, userId, date);
                     if (bookingId == 0) //0 means no booking found to this user for this parameters
                     {
                         var bookings = (await unitOfWork.BookingRepo.Find(
                             b => b.PlaygroundId == playGroundId
+                            && b.BookedDate.Date >= DateTime.Now.Date
                             && b.BookedDate.Date == Convert.ToDateTime(date).Date
                             && b.PlaygroundTimesId == int.Parse(timeId)));
+
+                        if (!string.IsNullOrEmpty(bookings?.ApplicationUserId)
+                            && await CheckJoinedTeam(bookings.BookingId) != 0)
+                            return new BookingViewModel
+                            {
+                                BookingId = bookings.BookingId,
+                                BookingOwner = false
+                            };
 
                         return (new BookingViewModel
                         {
                             NumOfPlayers = (await unitOfWork.BookingTeamRepo.GetAll())
-                                                  .Count(b => b.BookingId == bookings.BookingId),
+                                                  .Count(b => b.BookingId == bookings?.BookingId),
                             BookingExist = bookings != null,
                             BookingStatus = bookings?.BookingStatus ?? BookingStatus.Public,
                             MaxNumOfPlayers = bookings?.MaxNumOfPlayers ?? 0,
@@ -73,7 +83,8 @@ namespace La3bni.UI.Controllers
 
                     return new BookingViewModel
                     {
-                        BookingId = bookingId
+                        BookingId = bookingId,
+                        BookingOwner = true
                     };
                 }
                 return new BookingViewModel
@@ -85,23 +96,81 @@ namespace La3bni.UI.Controllers
             return new BookingViewModel();
         }
 
-        public async Task<int> CheckBookingNotExist(int timeId, string userId, string date)
+        public async Task<int> CheckBookingNotExist(int playgroundId, int timeId, string userId, string date)
         {
             return (await unitOfWork.BookingRepo.Find(b => b.ApplicationUserId == userId
-                                            && b.BookedDate.Date > DateTime.Now.Date
+                                            && b.PlaygroundId == playgroundId
+                                            && b.BookedDate.Date >= DateTime.Now.Date
                                             && b.BookedDate.Date == Convert.ToDateTime(date).Date
                                             && b.PlaygroundTimesId == timeId))?.BookingId ?? 0;
         }
 
-        public IActionResult CreateBooking(string period, int PlaygroundId, string selectedDate, string bookingId)
+        private async Task<int> CheckJoinedTeam(int bookingId)
         {
-            //unitOfWork.BookingRepo.Add()
-            return RedirectToAction("Index", "Home");
+            return (await unitOfWork.BookingTeamRepo.Find(b => b.BookingId == bookingId))?.BookingId ?? 0;
         }
 
-        public IActionResult CancelBooking(string bookingId)
+        public async Task<IActionResult> CreateBooking(string period, int PlaygroundId, string selectedDate, string numOfPlayers)
         {
-            return View();
+            if (int.TryParse(period, out int timeId) && int.TryParse(numOfPlayers, out int playersNo))
+            {
+                unitOfWork.BookingRepo.Add(new Booking
+                {
+                    ApplicationUserId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id,
+                    BookingStatus = BookingStatus.Public,
+                    BookedDate = Convert.ToDateTime(selectedDate),
+                    PlaygroundTimesId = timeId,
+                    PlaygroundId = PlaygroundId,
+                    MaxNumOfPlayers = playersNo,
+                    Price = (await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == PlaygroundId))?.AmPrice ?? 0
+                });
+                unitOfWork.Save();
+            }
+            return Json(new { redirectToUrl = Url.Action("", "Home") });
+        }
+
+        public async Task<IActionResult> JoinTeam(string bookingId)
+        {
+            if (int.TryParse(bookingId, out int bookId))
+            {
+                unitOfWork.BookingTeamRepo.Add(new BookingTeam
+                {
+                    BookingId = bookId,
+                    ApplicationUserId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id
+                });
+                unitOfWork.Save();
+            }
+
+            return Json(new { redirectToUrl = Url.Action("", "Home") });
+        }
+
+        public async Task<IActionResult> CancelBooking(string bookingId)
+        {
+            if (int.TryParse(bookingId, out int bookId))
+            {
+                var allTeam = (await unitOfWork.BookingTeamRepo.GetAll())
+                                                                    .Where(b => b.BookingId == bookId).ToList();
+                if (allTeam.Any())
+                {
+                    unitOfWork.BookingTeamRepo.Delete(allTeam);
+                }
+                unitOfWork.BookingRepo.Delete(await unitOfWork.BookingRepo.Find(b => b.BookingId == bookId));
+                unitOfWork.Save();
+            }
+            return Json(new { redirectToUrl = Url.Action("", "Home") });
+            //return View();
+        }
+
+        public async Task<IActionResult> LeaveTeam(string bookingId)
+        {
+            if (int.TryParse(bookingId, out int bookId))
+            {
+                string userId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
+                unitOfWork.BookingTeamRepo.Delete(await unitOfWork.BookingTeamRepo.Find(b => b.BookingId == bookId && b.ApplicationUserId == userId));
+                unitOfWork.Save();
+            }
+            return Json(new { redirectToUrl = Url.Action("", "Home") });
+            //return View();
         }
 
         private async Task<Status> CheckPlaygroundStatus(int playgroundId)

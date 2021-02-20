@@ -16,5 +16,7 @@ namespace Models.ViewModels
         public int MaxNumOfPlayers { get; set; }
 
         public int BookingId { get; set; }
+
+        public bool BookingOwner { get; set; }
     }
 }
