@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "tStaR6XWALjRBv4lj8DZge8b9AAIE6wJh86m76hiI5xe+JNcz9zH8RL+k4i0VxPVkfT9dEgJWMJgEAHujFRODw==",
+  "dgSpecHash": "1zh+11JsPi8oZCgiYJW2PIh1o8LlgzjFV4+5t7YEU+9gzjN+OgZp4I788o4ppJdZEGgjfyJZtAHuX6l/d5CDMA==",
   "success": true,
   "projectFilePath": "C:\\Users\\HAJER\\Documents\\GitHub\\MVCProject\\La3bni\\La3bni.UI\\La3bni.UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HAJER\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\HAJER\\.nuget\\packages\\identitymodel\\5.0.1\\identitymodel.5.0.1.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.3\\microsoft.aspnetcore.cryptography.internal.5.0.3.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.3\\microsoft.aspnetcore.cryptography.keyderivation.5.0.3.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
@@ -156,7 +157,8 @@
     "C:\\Users\\HAJER\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\HAJER\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
+    "C:\\Users\\HAJER\\.nuget\\packages\\system.text.encodings.web\\5.0.0\\system.text.encodings.web.5.0.0.nupkg.sha512",
+    "C:\\Users\\HAJER\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\HAJER\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",

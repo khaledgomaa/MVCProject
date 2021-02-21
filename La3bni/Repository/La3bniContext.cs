@@ -31,11 +31,13 @@ namespace Repository
         public DbSet<PlaygroundTimes> PlaygroundTimes { get; set; }
 
         public DbSet<Subscriber> Subscribers { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(EntityConfiguration<>).Assembly);
             base.OnModelCreating(builder);
+         
         }
     }
 }

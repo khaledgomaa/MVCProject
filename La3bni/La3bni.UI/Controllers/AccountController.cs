@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using IdentityModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -12,11 +13,11 @@ namespace La3bni.UI.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ImageManager imageManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ImageManager _imageManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ImageManager _imageManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -31,19 +32,30 @@ namespace La3bni.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register(ApplicationUser user)
+        public async Task<IActionResult> Register(User user)
         {
-            var x = 0;
+          
 
             if (ModelState.IsValid)
             {
-             
-                var pp = Request.Form["password"];
-                var created = await userManager.CreateAsync(user, pp);
+
+                var Appuser = new ApplicationUser {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    gender = user.Gender,
+                    city = user.City,
+                    PhoneNumber = user.PhoneNumber
+                    
+               
+               };
+               
+                var created = await userManager.CreateAsync(Appuser, user.Password);
                 if (created.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    imageManager.UploadFile(user.ImageFile, "AppImages");
+                    Appuser.ImagePath = imageManager.UploadFile(user.ImageFile, "AppImages");
+
+                    await signInManager.SignInAsync(Appuser, isPersistent: false);
+                  
                   
                     return RedirectToAction("myProfile");
                 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Models;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -36,8 +37,20 @@ namespace La3bni.UI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ImageManager, ImageManager>();
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<La3bniContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+
+
+
+
+            })
+               .AddEntityFrameworkStores<La3bniContext>();
+
 
         }
 
