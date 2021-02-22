@@ -4,7 +4,7 @@
 @inject IConfiguration config;
 
 @{
-    var periods = (List<PlayGroundTimesViewModel>)ViewBag.times;
+    //var periods = (List<PlayGroundTimesViewModel>)ViewBag.times;
     var selectedDate = DateTime.Now.Date;
 }
 
@@ -32,11 +32,11 @@
         </div>
         <div class="form-group">
             <label for="period" class="control-label">Select period</label>
-            <select name="period" class="form-control" id="periods" onchange="checkBooking()">
-                @for (int i = 0; i < periods.Count(); i++)
-                {
-                    <option value="@periods[i].Id">@periods[i].Time</option>
-                }
+            <select name="period" class="form-control" id="periods" onchange="onChangeSelectedPeriod(this.value)">
+                @*@for (int i = 0; i < periods.Count(); i++)
+                    {
+                        <option name="options" value="@periods[i].Id">@periods[i].Time</option>
+                    }*@
             </select>
             <label id="message"></label>
         </div>

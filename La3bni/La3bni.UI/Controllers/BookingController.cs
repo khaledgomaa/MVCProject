@@ -30,17 +30,26 @@ namespace La3bni.UI.Controllers
         public async Task<IActionResult> Index(int id)
         {
             Playground playGround = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == id);
+            //List<PlayGroundTimesViewModel> times = await GetTimes(id);
+
+            //ViewBag.times = times;
+
+            return View(playGround);
+        }
+
+        public async Task<List<PlayGroundTimesViewModel>> GetTimes(int id)
+        {
             List<PlaygroundTimes> times = (await unitOfWork.PlaygroundTimesRepo.GetAll())
                                         .Where(t => t.PlaygroundId == id)
                                         .ToList();
 
-            ViewBag.times = times.Select(a => new PlayGroundTimesViewModel
+            var newTimesFormat = times.Select(a => new PlayGroundTimesViewModel
             {
                 Time = $"{a.From:HH:mm} - {a.To:HH:mm} {a.State}",
                 Id = a.PlaygroundTimesId
             }).ToList();
 
-            return View(playGround);
+            return newTimesFormat;
         }
 
         public async Task<BookingViewModel> GetBookings(int playGroundId, string date, string timeId)
@@ -52,6 +61,7 @@ namespace La3bni.UI.Controllers
             {
                 if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
                 {
+                    await GetTimes(playGroundId);
                     int.TryParse(timeId, out int bookingTimeId);
                     int bookingId = await CheckBookingNotExist(playGroundId, bookingTimeId, userId, date);
                     if (bookingId == 0) //0 means no booking found to this user for this parameters

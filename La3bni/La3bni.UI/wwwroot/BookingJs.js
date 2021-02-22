@@ -1,13 +1,21 @@
 ﻿var bookingId = 0;
 function checkBooking() {
     if (checkDateIsValid()) {
+        getPlaygroundTimes();
+    } else {
+        document.getElementById("bookBtn").value = "Book";
+    }
+}
+
+function onChangeSelectedPeriod(id) {
+    if (checkDateIsValid()) {
         $.ajax({
             url: 'https://localhost:44379/Booking/GetBookings',
             type: "get", //send it through get method
             data: {
                 playGroundId: document.getElementById("playground").value,
                 date: document.getElementById("selDate").value,
-                timeId: document.getElementById("periods").value
+                timeId: id
             },
             success: function (response) {
                 console.log(response);
@@ -18,7 +26,7 @@ function checkBooking() {
                         changeBtnandMessageState(false, "This period has beed booked if you'd like to join this team click Join team =D");
 
                         bookingId = response.bookingId;
-                        console.log(bookingId);
+                        // console.log(bookingId);
                     } else {
                         changeBtnandMessageState(true, "This period has beed booked but you can't join sorry :(");
                     }
@@ -30,6 +38,7 @@ function checkBooking() {
                     } else {
                         removeMaxNumOfPlayers();
                         document.getElementById("bookBtn").value = "Cancel Booking";
+                        //console.log("Cancel My Booking Please");
                     }
                 } else if (response.playgroundStatus == 1) {
                     changeBtnandMessageState(true, "We're in maintenance please be patient");
@@ -39,14 +48,12 @@ function checkBooking() {
                 }
             }
         });
-    } else {
-        document.getElementById("bookBtn").value = "Book";
     }
 }
 
 function addMaxNumOfplayersandChecking() {
     if (document.getElementsByName("maxNum").length == 0) {
-        $("<label name='numOf' style='margin-top:10%' class='control - label'>num of players can join</label><input type='number' value='0' name='maxNum' min='0'  />").insertAfter("#message");
+        $("<label name='numOf' style='margin-top:10%' class='control - label'>num of players can join</label><input type='number' value='0' name='maxNum' min='0' max='9' style='width:50%;'  />").insertAfter("#message");
 
         document.getElementsByName("maxNum")[0].addEventListener("keypress", function (e) {
             e.preventDefault();
@@ -106,7 +113,7 @@ function joinTeam() {
             bookingId: bookingId
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             window.location.href = response.redirectToUrl;
         },
         error: function (req, status, error) {
@@ -124,7 +131,7 @@ function CancelBooking() {
             bookingId: bookingId
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             window.location.href = response.redirectToUrl;
         },
         error: function (req, status, error) {
@@ -142,7 +149,7 @@ function LeaveTeam() {
             bookingId: bookingId
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             window.location.href = response.redirectToUrl;
         },
         error: function (req, status, error) {
@@ -152,18 +159,121 @@ function LeaveTeam() {
 }
 
 function checkDateIsValid() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+    //var myPeriods = document.getElementById("periods");
+    var todayDate = new Date().getDate();
+    var selectedDate = new Date(document.getElementById("selDate").value).getDate();
 
-    today = mm + '/' + dd + '/' + yyyy;
-    if (new Date(document.getElementById("selDate").value) < new Date(today)) {
+    if (selectedDate < todayDate) {
         changeBtnandMessageState(true, "Please select a valid date");
         return false;
     }
+
     changeBtnandMessageState(false, "");
+
     return true;
+}
+
+function checkValidPeriod(time) {
+    var todayDate = new Date().getDate();
+    var selectedDate = new Date(document.getElementById("selDate").value).getDate();
+
+    if (selectedDate == todayDate) {
+        var curHour = new Date().getHours() % 12;
+        curHour = curHour ? curHour : 12; // the hour '0' should be '12'
+        var curState = new Date().getHours() >= 12 ? 'PM' : 'AM';
+        var state = time.slice(-2);
+        var optionHour = time.substring(0, 2);
+        if (curState == "PM" && state == "AM") {
+            return false;
+        } else if (curState == "PM" && state == "PM" && parseInt(optionHour) < curHour) {
+            return false;
+        } else if (curState == "PM" && state == "PM" && optionHour == "12") {
+            return false;
+        }
+        return true;
+    }
+    return true;
+}
+
+//function deleteTimedoutPeriodsFromSelectionList() {
+//    var todayDate = new Date().getDate();
+//    var selectedDate = new Date(document.getElementById("selDate").value).getDate();
+//    if (selectedDate == todayDate) {
+//        var curPeriods = document.getElementsByName("options");
+//        var curHour = new Date().getHours() % 12;
+//        curHour = curHour ? curHour : 12; // the hour '0' should be '12'
+//        var curState = new Date().getHours() >= 12 ? 'PM' : 'AM';
+//        var numOfOptions = curPeriods.length;
+//        for (let i = numOfOptions - 1; i >= 0; i--) {
+//            var state = curPeriods[i].innerText.slice(-2);
+//            var optionHour = curPeriods[i].innerText.substring(0, 2);
+//            if (curState == "PM" && state == "AM") {
+//                curPeriods[i].remove();
+//            } else if (curState == "PM" && state == "PM" && parseInt(optionHour) < curHour) {
+//                curPeriods[i].remove();
+//            } else if (curState == "PM" && state == "PM" && optionHour == "12") {
+//                curPeriods[i].remove();
+//            }
+//        }
+//    }
+//    if (document.getElementsByName("options").length == 0) {
+//        changeBtnandMessageState(true, "No available booking on this day we are sorry");
+//    }
+//}
+
+function getPlaygroundTimes() {
+    $.ajax({
+        type: "get",
+        url: "https://localhost:44379/Booking/GetTimes",
+        data:
+        {
+            id: parseInt(document.getElementById("playground").value)
+        },
+        success: function (response) {
+            //console.log(response);
+            resetAllOptions();
+            var selectList = document.getElementById("periods");
+            for (let i = 0; i < response.length; i++) {
+                if (checkValidPeriod(response[i].time)) {
+                    var option = document.createElement("option");
+                    option.text = response[i].time;
+                    option.value = response[i].id;
+                    option.setAttribute("name", "options");
+                    selectList.add(option);
+                }
+            }
+            if (document.getElementsByName("options").length == 0) {
+                changeBtnandMessageState(true, "No available booking on this day we are sorry");
+            } else {
+                var selecled = selectList.value;
+                onChangeSelectedPeriod(selecled);
+            }
+        },
+        error: function (req, status, error) {
+            //console.log(msg);
+        }
+    });
+}
+
+function getSelectedOption(sel) {
+    var opt;
+    for (var i = 0, len = sel.options.length; i < len; i++) {
+        opt = sel.options[i];
+        if (opt.value === true) {
+            break;
+        }
+    }
+    //console.log(opt);
+    return opt;
+}
+
+function resetAllOptions() {
+    var curPeriods = document.getElementsByName("options");
+    var periodsLength = curPeriods.length;
+
+    for (let i = periodsLength - 1; i >= 0; i--) {
+        curPeriods[i].remove();
+    }
 }
 
 function changeBtnandMessageState(btnState, message) {
@@ -202,6 +312,7 @@ function CustomConfirm() {
     }
 }
 var Confirm = new CustomConfirm();
+checkBooking();
 
 //var literCookies = [];
 //function getCookie(cookieName) {
@@ -226,5 +337,3 @@ var Confirm = new CustomConfirm();
 //    document.cookie = "curDate" + "=" + document.getElementById("selDate").value;
 //    document.cookie = "curPeriod" + "=" + document.getElementById("periods").value;
 //}
-
-checkBooking();
