@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -235,7 +235,8 @@ namespace Repository.Migrations
                     Rate = table.Column<float>(type: "real", nullable: false),
                     PlaygroundStatus = table.Column<int>(type: "int", nullable: false),
                     IsOffered = table.Column<byte>(type: "tinyint", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,20 +253,19 @@ namespace Repository.Migrations
                 name: "PlaygroundRates",
                 columns: table => new
                 {
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PlaygroundId = table.Column<int>(type: "int", nullable: false),
-                    Rate = table.Column<float>(type: "real", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Rate = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PlaygroundRates", x => new { x.ApplicationUserId, x.PlaygroundId });
                     table.ForeignKey(
-                        name: "FK_PlaygroundRates_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_PlaygroundRates_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PlaygroundRates_Playgrounds_PlaygroundId",
                         column: x => x.PlaygroundId,
@@ -420,11 +420,6 @@ namespace Repository.Migrations
                 name: "IX_Notifications_ApplicationUserId",
                 table: "Notifications",
                 column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlaygroundRates_ApplicationUserId1",
-                table: "PlaygroundRates",
-                column: "ApplicationUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlaygroundRates_PlaygroundId",

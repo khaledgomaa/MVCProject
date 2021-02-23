@@ -28,7 +28,7 @@ function onChangeSelectedPeriod(id) {
                         bookingId = response.bookingId;
                         // console.log(bookingId);
                     } else {
-                        changeBtnandMessageState(true, "This period has beed booked but you can't join sorry :(");
+                        changeBtnandMessageState(true, "This period has beed booked and no available place :(");
                     }
                 } else if (response.bookingId != 0) { // != 0 in this case user has booked before
                     bookingId = response.bookingId;
@@ -185,7 +185,7 @@ function checkValidPeriod(time) {
         var optionHour = time.substring(0, 2);
         if (curState == "PM" && state == "AM") {
             return false;
-        } else if (curState == "PM" && state == "PM" && parseInt(optionHour) < curHour) {
+        } else if (curState == "PM" && state == "PM" && parseInt(optionHour) <= curHour) {
             return false;
         } else if (curState == "PM" && state == "PM" && optionHour == "12") {
             return false;
@@ -194,32 +194,6 @@ function checkValidPeriod(time) {
     }
     return true;
 }
-
-//function deleteTimedoutPeriodsFromSelectionList() {
-//    var todayDate = new Date().getDate();
-//    var selectedDate = new Date(document.getElementById("selDate").value).getDate();
-//    if (selectedDate == todayDate) {
-//        var curPeriods = document.getElementsByName("options");
-//        var curHour = new Date().getHours() % 12;
-//        curHour = curHour ? curHour : 12; // the hour '0' should be '12'
-//        var curState = new Date().getHours() >= 12 ? 'PM' : 'AM';
-//        var numOfOptions = curPeriods.length;
-//        for (let i = numOfOptions - 1; i >= 0; i--) {
-//            var state = curPeriods[i].innerText.slice(-2);
-//            var optionHour = curPeriods[i].innerText.substring(0, 2);
-//            if (curState == "PM" && state == "AM") {
-//                curPeriods[i].remove();
-//            } else if (curState == "PM" && state == "PM" && parseInt(optionHour) < curHour) {
-//                curPeriods[i].remove();
-//            } else if (curState == "PM" && state == "PM" && optionHour == "12") {
-//                curPeriods[i].remove();
-//            }
-//        }
-//    }
-//    if (document.getElementsByName("options").length == 0) {
-//        changeBtnandMessageState(true, "No available booking on this day we are sorry");
-//    }
-//}
 
 function getPlaygroundTimes() {
     $.ajax({
@@ -311,6 +285,62 @@ function CustomConfirm() {
         //yesCallBack();
     }
 }
+
+function updateRate(e) {
+    switch (e.id) {
+        case "1":
+            updateSelectedStar("1");
+            updateRateInDb(1);
+            break;
+        case "2":
+            updateSelectedStar("2");
+            updateRateInDb(2);
+            break;
+        case "3":
+            updateSelectedStar("3");
+            updateRateInDb(3);
+            break;
+        case "4":
+            updateSelectedStar("4");
+            updateRateInDb(4);
+            break;
+        case "5":
+            updateSelectedStar("5");
+            updateRateInDb(5);
+            break;
+    }
+}
+
+function updateSelectedStar(starNum) {
+    var getOtherStars = document.getElementsByTagName("i");
+
+    for (let i = 0; i < getOtherStars.length; i++) {
+        if (getOtherStars[i].id <= starNum) {
+            getOtherStars[i].style.color = "#fc0";
+        } else {
+            getOtherStars[i].style.color = "aliceblue";
+        }
+    }
+}
+
+function updateRateInDb(selRate) {
+    $.ajax({
+        type: "get",
+        url: "https://localhost:44379/Booking/UpdateRate",
+        data:
+        {
+            playgroundId: document.getElementById("playground").value,
+            rate: selRate
+        },
+        success: function (response) {
+            console.log("done");
+        },
+        error: function (req, status, error) {
+            //console.log(msg);
+        }
+    });
+}
+
 var Confirm = new CustomConfirm();
 checkBooking();
 

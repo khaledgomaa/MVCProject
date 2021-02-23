@@ -52,12 +52,6 @@ namespace La3bni.Adminpanel
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{area=booking}/{action=index}/{id?}");
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Account}/{action=Index}/{id?}");
             });
         }
     }

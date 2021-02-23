@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(La3bniContext))]
-    [Migration("20210218182623_AddedImagePathToPlayGround")]
-    partial class AddedImagePathToPlayGround
+    [Migration("20210223215329_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -407,21 +407,16 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Models.PlaygroundRate", b =>
                 {
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("PlaygroundId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<float>("Rate")
                         .HasColumnType("real");
 
                     b.HasKey("ApplicationUserId", "PlaygroundId");
-
-                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("PlaygroundId");
 
@@ -585,7 +580,9 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Playground", "Playground")
                         .WithMany()

@@ -30,9 +30,6 @@ namespace La3bni.UI.Controllers
         public async Task<IActionResult> Index(int id)
         {
             Playground playGround = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == id);
-            //List<PlayGroundTimesViewModel> times = await GetTimes(id);
-
-            //ViewBag.times = times;
 
             return View(playGround);
         }
@@ -124,6 +121,11 @@ namespace La3bni.UI.Controllers
         {
             if (int.TryParse(period, out int timeId) && int.TryParse(numOfPlayers, out int playersNo))
             {
+                State state = (await unitOfWork.PlaygroundTimesRepo.Find(p => p.PlaygroundTimesId == timeId)).State;
+                float price = state == State.AM ?
+                    (await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == PlaygroundId))?.AmPrice ?? 0
+                    : (await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == PlaygroundId))?.PmPrice ?? 0;
+
                 unitOfWork.BookingRepo.Add(new Booking
                 {
                     ApplicationUserId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id,
@@ -132,7 +134,7 @@ namespace La3bni.UI.Controllers
                     PlaygroundTimesId = timeId,
                     PlaygroundId = PlaygroundId,
                     MaxNumOfPlayers = playersNo,
-                    Price = (await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == PlaygroundId))?.AmPrice ?? 0
+                    Price = price
                 });
                 unitOfWork.Save();
             }
@@ -181,6 +183,40 @@ namespace La3bni.UI.Controllers
             }
             return Json(new { redirectToUrl = Url.Action("", "Home") });
             //return View();
+        }
+
+        public async Task UpdateRate(string playgroundId, float rate)
+        {
+            string userId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
+
+            if (int.TryParse(playgroundId, out int id))
+            {
+                var checkRatedBefore = await unitOfWork.PlaygroundRateRepo
+                                      .Find(b => b.ApplicationUserId == userId && b.PlaygroundId == id);
+                if (checkRatedBefore?.PlaygroundId != null)
+                {
+                    checkRatedBefore.Rate = rate;
+                    unitOfWork.PlaygroundRateRepo.Update(checkRatedBefore);
+                }
+                else
+                {
+                    unitOfWork.PlaygroundRateRepo.Add(new PlaygroundRate
+                    {
+                        ApplicationUserId = userId,
+                        Rate = rate,
+                        PlaygroundId = id
+                    });
+
+                    unitOfWork.Save();
+                }
+
+                float avgRate = (await unitOfWork.PlaygroundRateRepo.GetAll()).Where(r => r.PlaygroundId == id).Average(r => r.Rate);
+
+                var playground = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == id);
+                playground.Rate = avgRate;
+                unitOfWork.PlayGroundRepo.Update(playground);
+                unitOfWork.Save();
+            }
         }
 
         private async Task<Status> CheckPlaygroundStatus(int playgroundId)
