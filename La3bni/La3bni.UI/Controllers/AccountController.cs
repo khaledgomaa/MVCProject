@@ -29,6 +29,12 @@ namespace La3bni.UI.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home"); 
+        }
 
 
         [HttpPost]
@@ -44,16 +50,17 @@ namespace La3bni.UI.Controllers
                     Email = user.Email,
                     gender = user.Gender,
                     city = user.City,
-                    PhoneNumber = user.PhoneNumber
-                    
+                    PhoneNumber = user.PhoneNumber,
+                    ImagePath=""
                
                };
-               
+
+                string P = (imageManager.UploadFile(user.ImageFile, "AppImages"));
+
+                Appuser.ImagePath = P;
                 var created = await userManager.CreateAsync(Appuser, user.Password);
                 if (created.Succeeded)
                 {
-                    Appuser.ImagePath = imageManager.UploadFile(user.ImageFile, "AppImages");
-
                     await signInManager.SignInAsync(Appuser, isPersistent: false);
                   
                   
@@ -67,55 +74,50 @@ namespace La3bni.UI.Controllers
             return View();
         }
 
-       
+
+
+        [HttpGet]
+        public IActionResult login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> login(LogIN user)
+        {
+            if (ModelState.IsValid)
+            {
+                var Appuser = new ApplicationUser();
+                
+                if (user.Email.Contains("@"))
+                    Appuser = await userManager.FindByEmailAsync(user.Email);
+                else
+                    Appuser = await userManager.FindByNameAsync(user.Email);
+
+
+                var result = await signInManager.PasswordSignInAsync(Appuser.UserName, user.Password, user.rememberMe,false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("myProfile");
+                }
+                
+                    ModelState.AddModelError("","Not correct data");
+               
+            }
+            return View(user);
+        }
+
+
         public IActionResult myProfile()
         {
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Create(Playground playground)
-        //{
-        //    imageManager.UploadFile(playground.ImageFile, "Playgrounds");
-        //    return View();
-        //}
+    
 
 
-
-        //// POST: AccountRegController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: AccountRegController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: AccountRegController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        
     }
 }

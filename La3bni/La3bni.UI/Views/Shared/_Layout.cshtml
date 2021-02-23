@@ -1,24 +1,33 @@
 ﻿
+@inject SignInManager<ApplicationUser> signInManager;
 <!DOCTYPE HTML>
-
+<html>
 <head>
     <title>Introspect by TEMPLATED</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/assets/css/main.css" />
+    @RenderSection("Styles", false)
 </head>
 
 <body>
 
-    <!-- Header -->
+     Header 
     <header id="header">
         <div class="inner">
             <a href="index.html" class="logo">introspect</a>
             <nav id="nav">
-                <a href="index.html">Home</a>
-                <a href="generic.html">Generic</a>
-                <a href="elements.html">Elements</a>
-                @Html.ActionLink("Register", "Register", "Account")
+                @Html.ActionLink("Home", "index", "Home")
+                @if (signInManager.IsSignedIn(User))
+                {
+                    @Html.ActionLink("LogOut", "Logout", "Account")
+                }
+                else
+                {
+                    @Html.ActionLink("Register", "Register", "Account")
+                    @Html.ActionLink("Login", "Login", "Account")
+                }
+
             </nav>
         </div>
     </header>
@@ -197,7 +206,7 @@
         </div>
     </section>-->
     <!-- Footer -->
-    <section id="four">
+    <!--<section id="four">
         <div class="inner">
             <header>
                 <h2>Get in Touch</h2>
@@ -220,9 +229,9 @@
                 </ul>
             </form>
         </div>
-    </section>
+    </section>-->
     <!-- Footer -->
-    <footer id="footer">
+    <!--<footer id="footer">
         <div class="container">
             <section class="links">
                 <div class="row">
@@ -294,7 +303,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>-->
 
     <!-- Scripts -->
     <script src="~/assets/js/jquery.min.js"></script>

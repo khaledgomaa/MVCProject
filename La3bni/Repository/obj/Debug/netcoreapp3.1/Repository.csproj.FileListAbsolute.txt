@@ -13,9 +13,6 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Mod
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Models.pdb
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CopyComplete
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.genruntimeconfig.cache
-C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfoInputs.cache
-C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfo.cs
-C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CoreCompileInputs.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Repository.deps.json
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.json
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.dev.json
@@ -24,6 +21,9 @@ C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreap
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Models.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Models.pdb
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csprojAssemblyReference.cache
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfoInputs.cache
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfo.cs
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CoreCompileInputs.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CopyComplete
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.pdb
