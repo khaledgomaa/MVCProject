@@ -1,4 +1,6 @@
 ﻿using Models;
+using Repository.CustomRepository;
+using Repository.IBookingRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,15 +11,15 @@ namespace Repository
     {
         public Repository<Playground> PlayGroundRepo { get; }
 
-        public Repository<Booking> BookingRepo { get; }
+        public BookingRepository BookingRepo { get; }
 
-        public Repository<BookingTeam> BookingTeamRepo { get; }
+        public BookingTeamRepo BookingTeamRepo { get; }
 
         public Repository<Subscriber> SubscriberRepo { get; }
 
         public Repository<PlaygroundRate> PlaygroundRateRepo { get; }
 
-        public Repository<PlaygroundTimes> PlaygroundTimesRepo { get; }
+        public PlaygroundTimesRepo PlaygroundTimesRepo { get; }
 
         public Repository<News> NewsRepo { get; }
 

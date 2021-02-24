@@ -295,7 +295,8 @@ function getCurrentRate() {
             playgroundId: parseInt(document.getElementById("playground").value)
         },
         success: function (response) {
-            updateSelectedStar(response.rate);
+            if (response.rate > 0)
+                updateSelectedStar(response.rate);
         },
         error: function (req, status, error) {
             //console.log(msg);

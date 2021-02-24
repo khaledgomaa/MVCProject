@@ -27,8 +27,6 @@ namespace La3bni.Adminpanel
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IBookingRepository, BookingRepository>();
-
             services.AddDbContext<La3bniContext>(options => options.UseSqlServer(configuration.GetConnectionString("La3bniCon")));
         }
 

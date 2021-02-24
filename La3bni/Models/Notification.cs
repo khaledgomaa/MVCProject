@@ -15,6 +15,8 @@ namespace Models
         [Required]
         public string Body { set; get; }
 
+        public byte Seen { get; set; }
+
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }

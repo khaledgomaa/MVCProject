@@ -11,13 +11,10 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
     [Route("booking")]
     public class BookingsController : Controller
     {
-        private readonly IBookingRepository bookingRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public BookingsController(IBookingRepository _bookingRepository
-                                , IUnitOfWork _unitOfWork)
+        public BookingsController(IUnitOfWork _unitOfWork)
         {
-            bookingRepository = _bookingRepository;
             unitOfWork = _unitOfWork;
         }
 
@@ -26,21 +23,21 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
         [Route("index")]
         public async Task<ActionResult> Index()
         {
-            return View(await bookingRepository.GetAll());
+            return View(await unitOfWork.BookingRepo.GetAllWithInclude());
         }
 
         // GET: BookingsController/Details/5
         [Route("Details/{id}")]
         public async Task<ActionResult> Details(int id)
         {
-            return View(await bookingRepository.Find(b => b.BookingId == id));
+            return View(await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == id));
         }
 
         // GET: BookingsController/Delete/5
         [Route("Delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            return View(await bookingRepository.Find(b => b.BookingId == id));
+            return View(await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == id));
         }
 
         // POST: BookingsController/Delete/5
@@ -51,13 +48,13 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
         {
             try
             {
-                var booking = await bookingRepository.Find(b => b.BookingId == id);
-                bookingRepository.Delete(booking);
+                var booking = await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == id);
+                unitOfWork.BookingRepo.Delete(booking);
                 unitOfWork.NotificationRepo.Add(new Notification
                 {
                     ApplicationUserId = booking.ApplicationUserId,
                     Title = "Booking has been canceled",
-                    Body = $"Playground : {booking.Playground.Name} on {booking.BookedDate:d} - {booking.PlaygroundTimes.From:HH:mm} - {booking.PlaygroundTimes.To:HH:mm} {booking.PlaygroundTimes.State}"
+                    Body = $"Playground : {booking.Playground.Name} on {booking.BookedDate:d} - {booking.PlaygroundTimes}"
                 });
                 unitOfWork.Save();
                 return RedirectToAction(nameof(Index));

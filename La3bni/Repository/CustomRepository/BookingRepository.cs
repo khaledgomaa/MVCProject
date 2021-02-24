@@ -17,7 +17,7 @@ namespace Repository.IBookingRepository
             la3BniContext = _la3BniContext;
         }
 
-        public override async Task<List<Booking>> GetAll()
+        public async Task<List<Booking>> GetAllWithInclude()
         {
             return await la3BniContext.Bookings.Include(b => b.ApplicationUser)
                                         .Include(b => b.Playground)
@@ -25,18 +25,12 @@ namespace Repository.IBookingRepository
                                         .ToListAsync();
         }
 
-        public override async Task<Booking> Find(Expression<Func<Booking, bool>> wherePredict)
+        public async Task<Booking> FindWithInclude(Expression<Func<Booking, bool>> wherePredict)
         {
             return await la3BniContext.Bookings.Include(b => b.ApplicationUser)
                                                 .Include(b => b.Playground)
                                                  .Include(b => b.PlaygroundTimes)
                                                  .FirstOrDefaultAsync(wherePredict);
-        }
-
-        public override void Delete(Booking entity)
-        {
-            base.Delete(entity);
-            la3BniContext.SaveChanges();
         }
     }
 }

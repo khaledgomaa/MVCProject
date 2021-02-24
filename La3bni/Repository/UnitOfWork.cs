@@ -1,4 +1,6 @@
 ﻿using Models;
+using Repository.CustomRepository;
+using Repository.IBookingRepository;
 
 namespace Repository
 {
@@ -6,13 +8,13 @@ namespace Repository
     {
         private readonly La3bniContext la3BniContext;
         private Repository<Playground> playGroundRepo;
-        private Repository<Booking> bookingRepo;
-        private Repository<BookingTeam> bookingTeamRepo;
+        private BookingRepository bookingRepo;
+        private BookingTeamRepo bookingTeamRepo;
         private Repository<FeedBack> feedBackRepo;
         private Repository<News> newsRepo;
         private Repository<Notification> notificationRepo;
         private Repository<PlaygroundRate> playgroundRateRepo;
-        private Repository<PlaygroundTimes> playgroundTimesRepo;
+        private PlaygroundTimesRepo playgroundTimesRepo;
         private Repository<Subscriber> subscriberRepo;
 
         public UnitOfWork(La3bniContext _la3BniContext)
@@ -30,22 +32,22 @@ namespace Repository
             }
         }
 
-        public Repository<Booking> BookingRepo
+        public BookingRepository BookingRepo
         {
             get
             {
                 if (bookingRepo == null)
-                    bookingRepo = new Repository<Booking>(la3BniContext);
+                    bookingRepo = new BookingRepository(la3BniContext);
                 return bookingRepo;
             }
         }
 
-        public Repository<BookingTeam> BookingTeamRepo
+        public BookingTeamRepo BookingTeamRepo
         {
             get
             {
                 if (bookingTeamRepo == null)
-                    bookingTeamRepo = new Repository<BookingTeam>(la3BniContext);
+                    bookingTeamRepo = new BookingTeamRepo(la3BniContext);
                 return bookingTeamRepo;
             }
         }
@@ -90,12 +92,12 @@ namespace Repository
             }
         }
 
-        public Repository<PlaygroundTimes> PlaygroundTimesRepo
+        public PlaygroundTimesRepo PlaygroundTimesRepo
         {
             get
             {
                 if (playgroundTimesRepo == null)
-                    playgroundTimesRepo = new Repository<PlaygroundTimes>(la3BniContext);
+                    playgroundTimesRepo = new PlaygroundTimesRepo(la3BniContext);
                 return playgroundTimesRepo;
             }
         }
