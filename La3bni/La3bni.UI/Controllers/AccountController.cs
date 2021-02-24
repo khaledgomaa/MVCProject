@@ -24,19 +24,36 @@ namespace La3bni.UI.Controllers
             imageManager = _imageManager;
             
         }
+        [AcceptVerbs("Get","Post")]
+        public async Task<IActionResult> Email_Unique(string  email)
+        {
+
+              var created = await userManager.FindByEmailAsync(email);
+            if (created is null)
+            {
+                return Json(true);
+            }
+            else return Json(false);
+        }
+        [AcceptVerbs("Get", "Post")]
+        public async Task<IActionResult> Name_Unique(string Username)
+        {
+
+            var created = await userManager.FindByNameAsync(Username);
+            if (created is null)
+            {
+                return Json(true);
+            }
+            else return Json(false);
+        }
+
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-        public async Task<IActionResult> logout()
-        {
-            await signInManager.SignOutAsync();
-
-            return RedirectToAction("Index", "Home"); 
-        }
-
-
+      
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {
@@ -46,7 +63,7 @@ namespace La3bni.UI.Controllers
             {
 
                 var Appuser = new ApplicationUser {
-                    UserName = user.UserName,
+                    UserName = user.Username,
                     Email = user.Email,
                     gender = user.Gender,
                     city = user.City,
@@ -71,7 +88,7 @@ namespace La3bni.UI.Controllers
                     ModelState.AddModelError("", err.Description);
                 }
             }
-            return View();
+            return View(user);
         }
 
 
@@ -95,29 +112,49 @@ namespace La3bni.UI.Controllers
                 else
                     Appuser = await userManager.FindByNameAsync(user.Email);
 
-
-                var result = await signInManager.PasswordSignInAsync(Appuser.UserName, user.Password, user.rememberMe,false);
-
-                if (result.Succeeded)
+                if (!(Appuser is null))
                 {
-                    return RedirectToAction("myProfile");
+                    var result = await signInManager.PasswordSignInAsync(Appuser.UserName, user.Password, user.rememberMe, false);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("myProfile", Appuser);
+                    }
+
+                    ModelState.AddModelError("", "Not correct data");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Not correct data");
+                    return View(user);
                 }
                 
-                    ModelState.AddModelError("","Not correct data");
-               
             }
             return View(user);
         }
 
 
-        public IActionResult myProfile()
+        public async Task<IActionResult> myProfileAsync(ApplicationUser current)
         {
-            return View();
+            var user = await userManager.GetUserAsync(User);
+            return View(user);
+        }
+        public IActionResult Profile_Playgrounds(List<Playground> pgs)
+        {
+            return View(pgs);
+        }
+        
+        public async Task<IActionResult> logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
-    
 
 
-        
+
+
+
     }
 }

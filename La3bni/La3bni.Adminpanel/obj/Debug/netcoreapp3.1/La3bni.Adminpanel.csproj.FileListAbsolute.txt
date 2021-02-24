@@ -104,7 +104,9 @@ C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\ne
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
@@ -115,6 +117,7 @@ C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\ne
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
@@ -128,6 +131,7 @@ C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\ne
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
@@ -156,6 +160,7 @@ C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\ne
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.AssemblyInfoInputs.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.AssemblyInfo.cs
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.csproj.CoreCompileInputs.cache
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.RazorAssemblyInfo.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\La3bni.Adminpanel\obj\Debug\netcoreapp3.1\La3bni.Adminpanel.RazorAssemblyInfo.cs

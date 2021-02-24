@@ -7,12 +7,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/assets/css/main.css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
     @RenderSection("Styles", false)
 </head>
 
 <body>
 
-     Header 
+    <!-- Header -->
     <header id="header">
         <div class="inner">
             <a href="index.html" class="logo">introspect</a>
@@ -21,6 +25,7 @@
                 @if (signInManager.IsSignedIn(User))
                 {
                     @Html.ActionLink("LogOut", "Logout", "Account")
+                    @Html.ActionLink("Profile", "myProfile", "Account")
                 }
                 else
                 {
@@ -304,11 +309,13 @@
             </div>
         </div>
     </footer>-->
-
     <!-- Scripts -->
     <script src="~/assets/js/jquery.min.js"></script>
     <script src="~/assets/js/skel.min.js"></script>
     <script src="~/assets/js/util.js"></script>
     <script src="~/assets/js/main.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

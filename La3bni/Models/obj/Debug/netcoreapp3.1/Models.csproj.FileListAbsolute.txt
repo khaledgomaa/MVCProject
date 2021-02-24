@@ -10,9 +10,9 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.deps.json
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.pdb
-C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfoInputs.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfo.cs
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.dll
 C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.pdb
+C:\Users\HAJER\Documents\GitHub\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache

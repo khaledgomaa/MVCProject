@@ -13,13 +13,12 @@ namespace Models
         [NotMapped]
         [DisplayName("Upload Image")]
         public IFormFile ImageFile { get; set; }
-
-       
         [Required]
         public City city { get; set; }
         [Required]
         public Gender gender { get; set; }
-
+        [Required]
+        public UserType Type { get; set; }
 
     }
     public enum Gender

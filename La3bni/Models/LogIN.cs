@@ -7,10 +7,11 @@ namespace Models
 {
    public class LogIN
     {
-        [Required]
+        [Required(ErrorMessage = "You must enter  your email or  username")]
         [Display(Name ="User Name or Email")]
+
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "You must enter  your password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name ="Remember Me")]

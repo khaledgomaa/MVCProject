@@ -2,10 +2,15 @@
 @{
     Layout = null;
 }
-@*@section Styles {*@
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/assets/css/login.css" />
+    <script src="~/assets/js/login.js"></script>
+}
 <link rel="stylesheet" href="~/assets/css/login.css" />
 <script src="~/assets/js/login.js"></script>
-@*}*@
+
 @model Models.LogIN
 @{
     ViewBag.Title = "Login";
@@ -21,10 +26,14 @@
 
 
                         <input asp-for="Email" />
-                        <label> Email or Username</label>
+                        <label asp-for="Email"> Email or Username</label>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
+                <br />
+                <br />
+                <br />
+
                 <div class="user-box">
                     <div class="form-group">
                         <input asp-for="Password" />
@@ -34,11 +43,17 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
-               
-                <div class="user-box">
+                <br />
+                <br />
+                <br />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <input type="checkbox" id="remeber" name="rememberMe" value="true">
-                    <label for="remeber"> Remember Me</label><br>
+                <br />
+                <br />
+                <div class="user-box">
+                    <label for="remeber" > Remember Me </label>
+                    <input type="checkbox" id="remeber" name="rememberMe">
+
 
                 </div>
 
@@ -57,3 +72,6 @@
         </div>
     </div>
 </div>
+<script src="~/lib/jquery/jquery.js"></script>
+<script src="~/lib/jquery-validate/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
