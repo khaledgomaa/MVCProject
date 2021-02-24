@@ -286,6 +286,23 @@ function CustomConfirm() {
     }
 }
 
+function getCurrentRate() {
+    $.ajax({
+        type: "get",
+        url: "https://localhost:44379/Booking/CheckRateBefore",
+        data:
+        {
+            playgroundId: parseInt(document.getElementById("playground").value)
+        },
+        success: function (response) {
+            updateSelectedStar(response.rate);
+        },
+        error: function (req, status, error) {
+            //console.log(msg);
+        }
+    });
+}
+
 function updateRate(e) {
     switch (e.id) {
         case "1":
@@ -343,6 +360,7 @@ function updateRateInDb(selRate) {
 
 var Confirm = new CustomConfirm();
 checkBooking();
+getCurrentRate();
 
 //var literCookies = [];
 //function getCookie(cookieName) {

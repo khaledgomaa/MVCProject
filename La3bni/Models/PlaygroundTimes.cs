@@ -21,6 +21,11 @@ namespace Models
         public DateTime To { get; set; }
 
         public State State { get; set; }
+
+        public override string ToString()
+        {
+            return $"{From:HH:mm} - {To:HH:mm} {State}";
+        }
     }
 
     public enum State

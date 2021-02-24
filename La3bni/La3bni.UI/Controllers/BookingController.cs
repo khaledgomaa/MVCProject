@@ -187,13 +187,12 @@ namespace La3bni.UI.Controllers
 
         public async Task UpdateRate(string playgroundId, float rate)
         {
-            string userId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
+            string userId = await GetCurrentUserId();
 
             if (int.TryParse(playgroundId, out int id))
             {
-                var checkRatedBefore = await unitOfWork.PlaygroundRateRepo
-                                      .Find(b => b.ApplicationUserId == userId && b.PlaygroundId == id);
-                if (checkRatedBefore?.PlaygroundId != null)
+                var checkRatedBefore = await CheckRateBefore(id);
+                if (checkRatedBefore.PlaygroundId != 0)
                 {
                     checkRatedBefore.Rate = rate;
                     unitOfWork.PlaygroundRateRepo.Update(checkRatedBefore);
@@ -206,17 +205,29 @@ namespace La3bni.UI.Controllers
                         Rate = rate,
                         PlaygroundId = id
                     });
-
-                    unitOfWork.Save();
                 }
+                unitOfWork.Save();
 
-                float avgRate = (await unitOfWork.PlaygroundRateRepo.GetAll()).Where(r => r.PlaygroundId == id).Average(r => r.Rate);
+                float avgRate = (await unitOfWork.PlaygroundRateRepo.GetAll()).Where(r => r.PlaygroundId == id)?.Average(r => r.Rate) ?? 0;
 
                 var playground = await unitOfWork.PlayGroundRepo.Find(p => p.PlaygroundId == id);
                 playground.Rate = avgRate;
                 unitOfWork.PlayGroundRepo.Update(playground);
                 unitOfWork.Save();
             }
+        }
+
+        public async Task<PlaygroundRate> CheckRateBefore(int playGroundId)
+        {
+            string userId = await GetCurrentUserId();
+
+            return (await unitOfWork.PlaygroundRateRepo
+                                  .Find(b => b.ApplicationUserId == userId && b.PlaygroundId == playGroundId)) ?? new PlaygroundRate();
+        }
+
+        private async Task<string> GetCurrentUserId()
+        {
+            return (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
         }
 
         private async Task<Status> CheckPlaygroundStatus(int playgroundId)
