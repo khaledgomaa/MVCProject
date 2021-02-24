@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace La3bni.Adminpanel.Areas.Booking.Controllers
 {
-    [Area("booking")]
-    [Route("booking")]
+    [Area("Booking")]
     public class BookingsController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -19,22 +18,22 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
         }
 
         // GET: BookingsController
-        [Route("")]
-        [Route("index")]
+        //[Route("")]
+        //[Route("index")]
         public async Task<ActionResult> Index()
         {
             return View(await unitOfWork.BookingRepo.GetAllWithInclude());
         }
 
         // GET: BookingsController/Details/5
-        [Route("Details/{id}")]
+        //[Route("Details/{id}")]
         public async Task<ActionResult> Details(int id)
         {
             return View(await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == id));
         }
 
         // GET: BookingsController/Delete/5
-        [Route("Delete/{id}")]
+        //[Route("Delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             return View(await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == id));
@@ -42,7 +41,7 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
 
         // POST: BookingsController/Delete/5
         [HttpPost]
-        [Route("Delete/{id}")]
+        //[Route("Delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
