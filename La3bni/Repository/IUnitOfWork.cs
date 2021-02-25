@@ -21,8 +21,6 @@ namespace Repository
 
         public PlaygroundTimesRepo PlaygroundTimesRepo { get; }
 
-        public Repository<News> NewsRepo { get; }
-
         public Repository<FeedBack> FeedBackRepo { get; }
 
         public Repository<Notification> NotificationRepo { get; }

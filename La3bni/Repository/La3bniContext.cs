@@ -22,8 +22,6 @@ namespace Repository
 
         public DbSet<FeedBack> FeedBacks { get; set; }
 
-        public DbSet<News> News { get; set; }
-
         public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<PlaygroundRate> PlaygroundRates { get; set; }

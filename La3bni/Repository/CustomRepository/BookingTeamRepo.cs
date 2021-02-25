@@ -20,7 +20,11 @@ namespace Repository.CustomRepository
 
         public Task<BookingTeam> FindWithInclude(Expression<Func<BookingTeam, bool>> wherePredict)
         {
-            return la3BniContext.BookingTeams.Include(b => b.ApplicationUser).Include(b => b.Booking).Include(b => b.Booking.Playground).Include(b => b.Booking.PlaygroundTimes).FirstOrDefaultAsync(wherePredict);
+            return la3BniContext.BookingTeams.Include(b => b.ApplicationUser)
+                                             .Include(b => b.Booking)
+                                             .Include(b => b.Booking.Playground)
+                                             .Include(b => b.Booking.PlaygroundTimes)
+                                             .FirstOrDefaultAsync(wherePredict);
         }
 
         public IQueryable<BookingTeam> GetAllIQueryable()

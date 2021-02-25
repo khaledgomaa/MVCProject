@@ -11,7 +11,6 @@ namespace Repository
         private BookingRepository bookingRepo;
         private BookingTeamRepo bookingTeamRepo;
         private Repository<FeedBack> feedBackRepo;
-        private Repository<News> newsRepo;
         private Repository<Notification> notificationRepo;
         private Repository<PlaygroundRate> playgroundRateRepo;
         private PlaygroundTimesRepo playgroundTimesRepo;
@@ -59,16 +58,6 @@ namespace Repository
                 if (feedBackRepo == null)
                     feedBackRepo = new Repository<FeedBack>(la3BniContext);
                 return feedBackRepo;
-            }
-        }
-
-        public Repository<News> NewsRepo
-        {
-            get
-            {
-                if (newsRepo == null)
-                    newsRepo = new Repository<News>(la3BniContext);
-                return newsRepo;
             }
         }
 
