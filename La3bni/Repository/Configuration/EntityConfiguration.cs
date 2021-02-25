@@ -30,4 +30,12 @@ namespace La3bni.Repository
             builder.HasKey(s => new { s.ApplicationUserId, s.PlaygroundId });
         }
     }
+
+    public class BookingConfig : EntityConfiguration<Booking>
+    {
+        public override void Configure(EntityTypeBuilder<Booking> builder)
+        {
+            builder.HasIndex(b => new { b.PlaygroundId, b.BookedDate, b.PlaygroundTimesId }).IsUnique();
+        }
+    }
 }

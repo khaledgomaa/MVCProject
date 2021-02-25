@@ -149,16 +149,24 @@ namespace La3bni.UI.Controllers
                     Price = price
                 };
 
-                unitOfWork.BookingRepo.Add(newBooking);
-
-                unitOfWork.NotificationRepo.Add(new Notification
+                try
                 {
-                    ApplicationUserId = userId,
-                    Title = "Booking has been created",
-                    Body = $"Playground : {playgroundTimesDetails?.Playground.Name ?? "NA"} on {newBooking?.BookedDate:d} - {playgroundTimesDetails}"
-                });
+                    unitOfWork.BookingRepo.Add(newBooking);
 
-                unitOfWork.Save();
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = userId,
+                        Title = "Booking has been created",
+                        Body = $"Playground : {playgroundTimesDetails?.Playground.Name ?? "NA"} on {newBooking?.BookedDate:d} - {playgroundTimesDetails}"
+                    });
+
+                    unitOfWork.Save();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return Json(new { error = "No bookings available please reload your page" });
+                }
             }
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }
@@ -170,28 +178,36 @@ namespace La3bni.UI.Controllers
                 var curUser = await GetCurrentUser();
                 var bookingDetails = await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == bookId);
 
-                unitOfWork.BookingTeamRepo.Add(new BookingTeam
+                try
                 {
-                    BookingId = bookId,
-                    ApplicationUserId = curUser?.Id
-                });
+                    unitOfWork.BookingTeamRepo.Add(new BookingTeam
+                    {
+                        BookingId = bookId,
+                        ApplicationUserId = curUser?.Id
+                    });
 
-                var bookingOwnerDetails = await userManager.FindByIdAsync(bookingDetails.ApplicationUserId);
-                unitOfWork.NotificationRepo.Add(new Notification
+                    var bookingOwnerDetails = await userManager.FindByIdAsync(bookingDetails.ApplicationUserId);
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = bookingOwnerDetails?.Id,
+                        Title = "New player joined your team",
+                        Body = $"Phone : {curUser?.PhoneNumber} , Playground : {bookingDetails.Playground?.Name ?? "NA"} on {bookingDetails?.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
+                    });
+
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = (await GetCurrentUser())?.Id,
+                        Title = "You have joined team",
+                        Body = $"Playground : {bookingDetails.Playground?.Name ?? "NA"} on {bookingDetails?.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
+                    });
+
+                    unitOfWork.Save();
+                }
+                catch (Exception e)
                 {
-                    ApplicationUserId = bookingOwnerDetails?.Id,
-                    Title = "New player joined your team",
-                    Body = $"Phone : {curUser?.PhoneNumber} , Playground : {bookingDetails.Playground?.Name ?? "NA"} on {bookingDetails?.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
-                });
-
-                unitOfWork.NotificationRepo.Add(new Notification
-                {
-                    ApplicationUserId = (await GetCurrentUser())?.Id,
-                    Title = "You have joined team",
-                    Body = $"Playground : {bookingDetails.Playground?.Name ?? "NA"} on {bookingDetails?.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
-                });
-
-                unitOfWork.Save();
+                    Debug.WriteLine(e);
+                    return Json(new { error = "No teams available please reload your page" });
+                }
             }
 
             return Json(new { redirectToUrl = Url.Action("", "Home") });
@@ -201,22 +217,24 @@ namespace La3bni.UI.Controllers
         {
             if (int.TryParse(bookingId, out int bookId))
             {
-                var allTeam = (await unitOfWork.BookingTeamRepo.GetAll())
-                                                                    .Where(b => b.BookingId == bookId).ToList();
-                if (allTeam.Any())
-                {
-                    unitOfWork.BookingTeamRepo.Delete(allTeam);
-                }
                 var bookingDetails = await unitOfWork.BookingRepo.FindWithInclude(b => b.BookingId == bookId);
 
-                unitOfWork.NotificationRepo.Add(new Notification
+                try
                 {
-                    ApplicationUserId = (await GetCurrentUser())?.Id,
-                    Title = "Booking has been canceled",
-                    Body = $"Playground : {bookingDetails.Playground.Name} on {bookingDetails.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
-                });
-                unitOfWork.BookingRepo.Delete(bookingDetails);
-                unitOfWork.Save();
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = (await GetCurrentUser())?.Id,
+                        Title = "Booking has been canceled",
+                        Body = $"Playground : {bookingDetails.Playground.Name} on {bookingDetails.BookedDate:d} - {bookingDetails.PlaygroundTimes}"
+                    });
+                    unitOfWork.BookingRepo.Delete(bookingDetails);
+                    unitOfWork.Save();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return Json(new { error = "booking already canceled please reload your page" });
+                }
             }
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }
@@ -228,22 +246,30 @@ namespace La3bni.UI.Controllers
                 var userDetails = await GetCurrentUser();
                 var bookingDetails = await unitOfWork.BookingTeamRepo.FindWithInclude(b => b.BookingId == bookId && b.ApplicationUserId == userDetails.Id);
 
-                unitOfWork.NotificationRepo.Add(new Notification
+                try
                 {
-                    ApplicationUserId = bookingDetails.Booking.ApplicationUserId,
-                    Title = "Player left your team",
-                    Body = $"Playground : {bookingDetails.Booking.Playground?.Name ?? "NA"} on {bookingDetails.Booking?.BookedDate:d} - {bookingDetails.Booking.PlaygroundTimes}"
-                });
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = bookingDetails.Booking.ApplicationUserId,
+                        Title = "Player left your team",
+                        Body = $"Playground : {bookingDetails.Booking.Playground?.Name ?? "NA"} on {bookingDetails.Booking?.BookedDate:d} - {bookingDetails.Booking.PlaygroundTimes}"
+                    });
 
-                unitOfWork.NotificationRepo.Add(new Notification
+                    unitOfWork.NotificationRepo.Add(new Notification
+                    {
+                        ApplicationUserId = userDetails.Id,
+                        Title = "You left team",
+                        Body = $"Playground : {bookingDetails.Booking.Playground?.Name ?? "NA"} on {bookingDetails.Booking?.BookedDate:d} - {bookingDetails.Booking.PlaygroundTimes}"
+                    });
+
+                    unitOfWork.BookingTeamRepo.Delete(bookingDetails);
+                    unitOfWork.Save();
+                }
+                catch (Exception e)
                 {
-                    ApplicationUserId = userDetails.Id,
-                    Title = "You left team",
-                    Body = $"Playground : {bookingDetails.Booking.Playground?.Name ?? "NA"} on {bookingDetails.Booking?.BookedDate:d} - {bookingDetails.Booking.PlaygroundTimes}"
-                });
-
-                unitOfWork.BookingTeamRepo.Delete(bookingDetails);
-                unitOfWork.Save();
+                    Debug.WriteLine(e);
+                    return Json(new { error = "Team leader already canceled booking please reload your page" });
+                }
             }
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }

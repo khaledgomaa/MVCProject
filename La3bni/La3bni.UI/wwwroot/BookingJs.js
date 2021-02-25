@@ -96,7 +96,11 @@ function CreateBooking() {
             numOfPlayers: document.getElementsByName("maxNum")[0].value
         },
         success: function (response) {
-            window.location.href = response.redirectToUrl;
+            if (response.error) {
+                changeBtnandMessageState(true, response.error);
+            } else {
+                window.location.href = response.redirectToUrl;
+            }
         },
         error: function (req, status, error) {
             //console.log(msg);
@@ -114,7 +118,11 @@ function joinTeam() {
         },
         success: function (response) {
             //console.log(response);
-            window.location.href = response.redirectToUrl;
+            if (response.error) {
+                changeBtnandMessageState(true, response.error);
+            } else {
+                window.location.href = response.redirectToUrl;
+            }
         },
         error: function (req, status, error) {
             //console.log(msg);
