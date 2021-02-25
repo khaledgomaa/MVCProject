@@ -13,3 +13,5 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Mod
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\bin\Debug\netcoreapp3.1\Models.pdb
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CopyComplete
 D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.genruntimeconfig.cache
+D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.Resources.resources
+D:\Courses\Intake41\MVC\MVCProject\La3bni\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.GenerateResource.cache

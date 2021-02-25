@@ -60,7 +60,7 @@ namespace La3bni.UI.Controllers
                 {
                     if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
                     {
-                        GetTimes(playGroundId);
+                        //GetTimes(playGroundId);
                         int.TryParse(timeId, out int bookingTimeId);
                         int bookingId = await CheckBookingNotExist(playGroundId, bookingTimeId, userId, date);
                         if (bookingId == 0) //0 means no booking found to this user for this parameters

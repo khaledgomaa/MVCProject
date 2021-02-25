@@ -77,7 +77,6 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3b
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.TagHelpers.input.cache
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.TagHelpers.output.cache
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.RazorCoreGenerate.cache
-D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.RazorTargetAssemblyInfo.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.Views.pdb
@@ -160,3 +159,8 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razo
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Booking\Index.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\MailKit.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\MimeKit.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\libman.json
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs

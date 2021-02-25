@@ -1,6 +1,5 @@
 ﻿@model Playground
 @using Models.ViewModels;
-@using Microsoft.Extensions.Configuration;
 @inject IConfiguration config;
 
 @{
@@ -8,12 +7,10 @@
     var selectedDate = DateTime.Now.Date;
 }
 
-<link href="~/assets/css/Booking.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="~/dialog.css" />
 <div class="fullWidth">
-    <img class="center-fit" src="@string.Concat(@config.GetSection("AdminPanelUrl").Value,@Model.ImagePath)" />
+    <img class="center-fit" style="width: 100%; height: 50vh;" src="@string.Concat(@config.GetSection("AdminPanelUrl").Value,@Model.ImagePath)" />
 </div>
 
 <div class="row">
@@ -116,6 +113,6 @@
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
 <script src="~/BookingJs.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@

@@ -38,6 +38,8 @@ namespace La3bni.UI
 
             services.AddScoped<ImageManager, ImageManager>();
 
+            services.AddScoped<IEmailRepository, EmailRepository>();
+
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
@@ -63,7 +65,7 @@ namespace La3bni.UI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
