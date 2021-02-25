@@ -5,6 +5,7 @@ using Models.ViewModels;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,53 +52,59 @@ namespace La3bni.UI.Controllers
 
         public async Task<BookingViewModel> GetBookings(int playGroundId, string date, string timeId)
         {
-            //check if user is signed in or not
-            string userId = (await userManager.FindByNameAsync("khaledgomaa"))?.Id;
-
-            if (!string.IsNullOrEmpty(userId))
+            try
             {
-                if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
+                string userId = (await GetCurrentUser())?.Id ?? "";
+
+                if (!string.IsNullOrEmpty(userId))
                 {
-                    GetTimes(playGroundId);
-                    int.TryParse(timeId, out int bookingTimeId);
-                    int bookingId = await CheckBookingNotExist(playGroundId, bookingTimeId, userId, date);
-                    if (bookingId == 0) //0 means no booking found to this user for this parameters
+                    if (await CheckPlaygroundStatus(playGroundId) == Status.Available)
                     {
-                        var bookings = (await unitOfWork.BookingRepo.Find(
-                            b => b.PlaygroundId == playGroundId
-                            && b.BookedDate.Date >= DateTime.Now.Date
-                            && b.BookedDate.Date == Convert.ToDateTime(date).Date
-                            && b.PlaygroundTimesId == int.Parse(timeId)));
-
-                        if (!string.IsNullOrEmpty(bookings?.ApplicationUserId)
-                            && await CheckJoinedTeam(bookings.BookingId) != 0)
-                            return new BookingViewModel
-                            {
-                                BookingId = bookings.BookingId,
-                                BookingOwner = false
-                            };
-
-                        return (new BookingViewModel
+                        GetTimes(playGroundId);
+                        int.TryParse(timeId, out int bookingTimeId);
+                        int bookingId = await CheckBookingNotExist(playGroundId, bookingTimeId, userId, date);
+                        if (bookingId == 0) //0 means no booking found to this user for this parameters
                         {
-                            NumOfPlayers = unitOfWork.BookingTeamRepo.GetAllIQueryable()
-                                                  .Count(b => b.BookingId == bookings.BookingId),
-                            BookingExist = bookings != null,
-                            BookingStatus = bookings?.BookingStatus ?? BookingStatus.Public,
-                            MaxNumOfPlayers = bookings?.MaxNumOfPlayers ?? 0,
-                            BookingId = bookings?.BookingId ?? 0
-                        });
-                    }
+                            var bookings = (await unitOfWork.BookingRepo.Find(
+                                b => b.PlaygroundId == playGroundId
+                                && b.BookedDate.Date >= DateTime.Now.Date
+                                && b.BookedDate.Date == Convert.ToDateTime(date).Date
+                                && b.PlaygroundTimesId == int.Parse(timeId)));
 
+                            if (!string.IsNullOrEmpty(bookings?.ApplicationUserId)
+                                && await CheckJoinedTeam(bookings.BookingId) != 0)
+                                return new BookingViewModel
+                                {
+                                    BookingId = bookings.BookingId,
+                                    BookingOwner = false
+                                };
+
+                            return (new BookingViewModel
+                            {
+                                NumOfPlayers = unitOfWork.BookingTeamRepo.GetAllIQueryable()
+                                                      .Count(b => b.BookingId == bookings.BookingId),
+                                BookingExist = bookings?.BookingId != 0,
+                                BookingStatus = bookings?.BookingStatus ?? BookingStatus.Public,
+                                MaxNumOfPlayers = bookings?.MaxNumOfPlayers ?? 0,
+                                BookingId = bookings?.BookingId ?? 0
+                            });
+                        }
+
+                        return new BookingViewModel
+                        {
+                            BookingId = bookingId,
+                            BookingOwner = true
+                        };
+                    }
                     return new BookingViewModel
                     {
-                        BookingId = bookingId,
-                        BookingOwner = true
+                        PlaygroundStatus = Status.Busy
                     };
                 }
-                return new BookingViewModel
-                {
-                    PlaygroundStatus = Status.Busy
-                };
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
             }
 
             return new BookingViewModel();
@@ -114,7 +121,8 @@ namespace La3bni.UI.Controllers
 
         private async Task<int> CheckJoinedTeam(int bookingId)
         {
-            return (await unitOfWork.BookingTeamRepo.Find(b => b.BookingId == bookingId))?.BookingId ?? 0;
+            string userId = (await GetCurrentUser())?.Id;
+            return (await unitOfWork.BookingTeamRepo.Find(b => b.BookingId == bookingId && b.ApplicationUserId == userId))?.BookingId ?? 0;
         }
 
         public async Task<IActionResult> CreateBooking(string period, int PlaygroundId, string selectedDate, string numOfPlayers)
@@ -260,8 +268,8 @@ namespace La3bni.UI.Controllers
                         Rate = rate,
                         PlaygroundId = id
                     });
+                    unitOfWork.Save();
                 }
-                unitOfWork.Save();
 
                 float avgRate = (await unitOfWork.PlaygroundRateRepo.GetAll()).Where(r => r.PlaygroundId == id)?.Average(r => r.Rate) ?? 0;
 

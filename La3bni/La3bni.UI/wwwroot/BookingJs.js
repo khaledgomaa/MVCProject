@@ -182,12 +182,12 @@ function checkValidPeriod(time) {
         curHour = curHour ? curHour : 12; // the hour '0' should be '12'
         var curState = new Date().getHours() >= 12 ? 'PM' : 'AM';
         var state = time.slice(-2);
-        var optionHour = time.substring(0, 2);
+        var optionHour = parseInt(time.substring(0, 2));
         if (curState == "PM" && state == "AM") {
             return false;
-        } else if (curState == "PM" && state == "PM" && parseInt(optionHour) <= curHour) {
+        } else if (curState == "PM" && state == "PM" && curHour != 12 && optionHour <= curHour) {
             return false;
-        } else if (curState == "PM" && state == "PM" && optionHour == "12") {
+        } else if (curState == "PM" && state == "PM" && optionHour == 12) {
             return false;
         }
         return true;
