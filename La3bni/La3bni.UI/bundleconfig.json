@@ -1,7 +1,0 @@
-[
-  {
-    "outputFileName": "wwwroot/assets/jss/Script.min.js",
-    "inputFiles": [ "wwwroot/assets/js/main.js"],
-    "minify": { "enabled": true }
-  }
-]
