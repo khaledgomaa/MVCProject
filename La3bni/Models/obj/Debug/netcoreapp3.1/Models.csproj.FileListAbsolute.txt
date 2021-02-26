@@ -1,9 +1,0 @@
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfoInputs.cache
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfo.cs
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.deps.json
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.dll
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\bin\Debug\netcoreapp3.1\Models.pdb
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.dll
-D:\Courses\Intake41\MVC\MVCProject\La3bni\Models\obj\Debug\netcoreapp3.1\Models.pdb

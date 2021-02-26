@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "La3bni.UI", "La3bni.UI\La3bni.UI.csproj", "{0EB60B96-C53B-4A2A-94DF-18EAFDD740AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "La3bni.Adminpanel", "La3bni.Adminpanel\La3bni.Adminpanel.csproj", "{84AB77F9-10B0-43BC-8B86-98D1AD3413EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "La3bni.Adminpanel", "La3bni.Adminpanel\La3bni.Adminpanel.csproj", "{84AB77F9-10B0-43BC-8B86-98D1AD3413EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

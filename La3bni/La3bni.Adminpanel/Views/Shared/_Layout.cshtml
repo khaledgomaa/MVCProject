@@ -28,6 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="~/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    <link href="~/assets/css/MyStyle.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -82,8 +83,8 @@ The above copyright notice and this permission notice shall be included in all c
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./notifications.html">
-                            <i class="material-icons">notifications</i>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Email" asp-action="Index">
+                            <i class="material-icons">Emails</i>
                             <p>Emails</p>
                         </a>
                     </li>
@@ -148,8 +149,14 @@ The above copyright notice and this permission notice shall be included in all c
             @RenderBody()
         </div>
     </div>
-
     <!--   Core JS Files   -->
+
+
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
     <script src="~/assets/js/core/jquery.min.js"></script>
     <script src="~/assets/js/core/popper.min.js"></script>
     <script src="~/assets/js/core/bootstrap-material-design.min.js"></script>
