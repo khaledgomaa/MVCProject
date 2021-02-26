@@ -18,8 +18,8 @@ namespace La3bni.Adminpanel.Areas.Booking.Controllers
         }
 
         // GET: BookingsController
-        //[Route("")]
-        //[Route("index")]
+        [Route("")]
+        [Route("index")]
         public async Task<ActionResult> Index()
         {
             return View(await unitOfWork.BookingRepo.GetAllWithInclude());

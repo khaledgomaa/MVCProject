@@ -95,7 +95,7 @@
                         <h3>@Offers[i].Name</h3>
                     </header>
                     <div class="image fit playground-image">
-                        <a asp-action="#" asp-controller="#" asp-route-playgroundId="@Offers[i].PlaygroundId">
+                        <a asp-action="Index" asp-controller="Booking" asp-route-id="@Offers[i].PlaygroundId">
                             <img class="plyground-card-image" src="@config["AdminPanelUrl"]/@Offers[i].ImagePath" alt="@Offers[i].Name Image" />
                         </a>
                         <ul class="list-group-item-info">

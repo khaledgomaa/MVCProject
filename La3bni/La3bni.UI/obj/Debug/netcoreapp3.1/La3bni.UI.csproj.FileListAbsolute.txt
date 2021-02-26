@@ -169,3 +169,13 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Stri
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Index.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Pay.cshtml.g.cs
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Charge.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\La3bni.UI.MvcApplicationPartsAssemblyInfo.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Account\login.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Account\myProfile.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Notification.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Stadiums\Index.cshtml.g.cs

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE HTML>
+﻿@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
+
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>Introspect by TEMPLATED</title>
@@ -16,6 +19,12 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     @*<link rel="stylesheet" href="/resources/demos/style.css">*@
     <link rel="stylesheet" href="~/assets/css/main.css" />
+    <style>
+        #navPanel {
+            display: none;
+        }
+    </style>
+    @RenderSection("Styles", false)
 </head>
 
 <body>
@@ -37,18 +46,22 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/" id="MyNav">Home</a></li>
 
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Services <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                            <li><a href="#">Digital Marketing</a></li>
-                        </ul>
-                    </li>
+                    @*<li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Services <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Web Design</a></li>
+                                <li><a href="#">Web Development</a></li>
+                                <li><a href="#">Graphic Design</a></li>
+                                <li><a href="#">Digital Marketing</a></li>
+                            </ul>
+                        </li>*@
+                    <li><a asp-controller="Stadiums" asp-action="Index">Stadiums</a></li>
 
                     <li><a href="#footer">Contact</a></li>
-                    <li><a href="#">Register</a></li>
+                    @if (!signInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                    }
                 </ul>
                 <form class="navbar-form form-inline">
                     <div class="input-group search-box">
@@ -57,20 +70,26 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" class="notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a></li>
-                    <li><a href="#" class="messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a></li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action">
-                            @*<img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar">*@
-                            <i class="fa fa-user" aria-hidden="true"></i>Paula Wilson <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-user-o"></i> Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar-o"></i> Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
-                        </ul>
-                    </li>
+
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action">
+                                @*<img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar">*@
+                                <i class="fa fa-user" aria-hidden="true"></i>Paula Wilson <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="Account" asp-action="myProfile"><i class="fa fa-user-o"></i> Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-controller="Account" asp-action="logout"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Account" asp-action="login">Log In</a></li>
+                    }
                 </ul>
 
                 @*<div class="navbar-nav ml-auto">
@@ -90,213 +109,7 @@
             </div>
         </nav>
 
-        <!-- #region Old  and Simple Nav Bar -->
-        @*<header id="header">
-                <div class="inner">
-                    <a href="index.html" class="logo">introspect</a>
-                    <nav id="nav">
-                        <a href="index.html">Home</a>
-                        <a href="generic.html">Generic</a>
-                        <a href="elements.html">Elements</a>
-                    </nav>
-                </div>
-            </header>
-            <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>*@
-
-        <!-- #endregion -->
-
         @RenderBody()
-
-        <!-- #region Sections
-        -->
-        <!-- One -->
-        <!--<section id="one">
-            <div class="inner">
-                <header>
-                    <h2>Magna Etiam Lorem</h2>
-                </header>
-                <p>
-                    Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscin sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu,
-                    erisque hendrerit tellus. Integer sagittis. Vivamus a mauris eget arcu gravida tristique. Nunc iaculis mi in ante.
-                </p>
-                <ul class="actions">
-                    <li><a href="#" class="button alt">Learn More</a></li>
-                </ul>
-            </div>
-        </section>-->
-        <!-- Two -->
-        <!--<section id="two">
-            <div class="inner">
-                <article>
-                    <div class="content">
-                        <header>
-                            <h3>Pellentesque adipis</h3>
-                        </header>
-                        <div class="image fit">
-                            <img src="images/pic01.jpg" alt="" />
-                        </div>
-                        <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna ullamcorper vehicula. Integer adipiscin sem. Nullam quis massa sit amet lorem ipsum feugiat tempus.</p>
-                    </div>
-                </article>
-                <article class="alt">
-                    <div class="content">
-                        <header>
-                            <h3>Morbi interdum mol</h3>
-                        </header>
-                        <div class="image fit">
-                            <img src="images/pic02.jpg" alt="" />
-                        </div>
-                        <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna ullamcorper vehicula. Integer adipiscin sem. Nullam quis massa sit amet lorem ipsum feugiat tempus.</p>
-                    </div>
-                </article>
-            </div>
-        </section>-->
-        <!-- Three -->
-        <!--<section id="three">
-            <div class="inner">
-                <article>
-                    <div class="content">
-                        <span class="icon fa-laptop"></span>
-                        <header>
-                            <h3>Tempus Feugiat</h3>
-                        </header>
-                        <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna lorem ullamcorper laoreet, lectus arcu.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <div class="content">
-                        <span class="icon fa-diamond"></span>
-                        <header>
-                            <h3>Aliquam Nulla</h3>
-                        </header>
-                        <p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <div class="content">
-                        <span class="icon fa-laptop"></span>
-                        <header>
-                            <h3>Sed Magna</h3>
-                        </header>
-                        <p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-        </section>-->
-        <!-- Three -->
-        <!--<section id="three">
-            <div class="inner">
-                <article>
-                    <div class="content">
-                        <span class="icon fa-laptop"></span>
-                        <header>
-                            <h3>Tempus Feugiat</h3>
-                        </header>
-                        <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna lorem ullamcorper laoreet, lectus arcu.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <div class="content">
-                        <span class="icon fa-diamond"></span>
-                        <header>
-                            <h3>Aliquam Nulla</h3>
-                        </header>
-                        <p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <div class="content">
-                        <span class="icon fa-laptop"></span>
-                        <header>
-                            <h3>Sed Magna</h3>
-                        </header>
-                        <p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button alt">Learn More</a></li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-        </section>-->
-        <!-- #endregion -->
-        <!-- #region Old Get In touch -->
-        @*@using La3bni.UI
-            @model Email
-             #region Get In Touch Section
-            <section id="four">
-                    <div class="inner">
-                        <header>
-                            <h2>Get in Touch</h2>
-                        </header>
-
-                        <form method="post" asp-action="GetInTouch" asp-controller="Home">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="field half">
-                                <label asp-for="Name"></label>
-                                <input asp-for="Name" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="field half">
-                                <label asp-for="UserEmail"></label>
-                                <input asp-for="UserEmail" />
-                                <span asp-validation-for="UserEmail" class="text-danger"></span>
-                            </div>
-                            <div class="field">
-                                <label asp-for="Message"></label>
-                                <textarea asp-for="Message" rows="3"></textarea>
-                                <span asp-validation-for="Message" class="text-danger"></span>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="Send Message" class="alt" /></li>
-                            </ul>
-                        </form>
-                    </div>
-                </section><section id="four">
-                <div class="inner">
-                    <header>
-                        <h2></h2>
-                    </header>
-
-                    <form method="post" asp-action="GetInTouch" asp-controller="Home">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="field half">
-                            <label asp-for="Name"></label>
-                            <input asp-for="Name" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-                        <div class="field half">
-                            <label asp-for="UserEmail"></label>
-                            <input asp-for="UserEmail" />
-                            <span asp-validation-for="UserEmail" class="text-danger"></span>
-                        </div>
-                        <div class="field">
-                            <label asp-for="Message"></label>
-                            <textarea asp-for="Message" rows="3"></textarea>
-                            <span asp-validation-for="Message" class="text-danger"></span>
-                        </div>
-                        <ul class="actions">
-                            <li><input type="submit" value="Send Message" class="alt" /></li>
-                        </ul>
-                    </form>
-                </div>
-            </section>*@
-
-        <!-- #endregion -->
 
         <footer id="footer">
             <div class="container">

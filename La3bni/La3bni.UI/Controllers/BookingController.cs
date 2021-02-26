@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.ViewModels;
@@ -126,6 +127,7 @@ namespace La3bni.UI.Controllers
             return (await unitOfWork.BookingTeamRepo.Find(b => b.BookingId == bookingId && b.ApplicationUserId == userId))?.BookingId ?? 0;
         }
 
+        [Authorize]
         public async Task<IActionResult> CreateBooking(string period, int PlaygroundId, string selectedDate, string numOfPlayers)
         {
             if (int.TryParse(period, out int timeId) && int.TryParse(numOfPlayers, out int playersNo))
@@ -172,6 +174,7 @@ namespace La3bni.UI.Controllers
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }
 
+        [Authorize]
         public async Task<IActionResult> JoinTeam(string bookingId)
         {
             if (int.TryParse(bookingId, out int bookId))
@@ -214,6 +217,7 @@ namespace La3bni.UI.Controllers
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }
 
+        [Authorize]
         public async Task<IActionResult> CancelBooking(string bookingId)
         {
             if (int.TryParse(bookingId, out int bookId))
@@ -240,6 +244,7 @@ namespace La3bni.UI.Controllers
             return Json(new { redirectToUrl = Url.Action("", "Home") });
         }
 
+        [Authorize]
         public async Task<IActionResult> LeaveTeam(string bookingId)
         {
             if (int.TryParse(bookingId, out int bookId))
