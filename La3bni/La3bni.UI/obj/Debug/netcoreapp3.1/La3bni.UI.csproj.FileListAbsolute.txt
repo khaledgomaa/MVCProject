@@ -164,3 +164,8 @@ D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Mime
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\libman.json
 D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\bin\Debug\netcoreapp3.1\Stripe.net.dll
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Index.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Pay.cshtml.g.cs
+D:\Courses\Intake41\MVC\MVCProject\La3bni\La3bni.UI\obj\Debug\netcoreapp3.1\Razor\Views\Payment\Charge.cshtml.g.cs

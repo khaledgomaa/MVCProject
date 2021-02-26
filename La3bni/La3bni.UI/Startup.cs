@@ -1,3 +1,4 @@
+using La3bni.UI.Payment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Models;
 using Repository;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +48,8 @@ namespace La3bni.UI
             })
             .AddEntityFrameworkStores<La3bniContext>()
             .AddDefaultTokenProviders();
+
+            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +59,8 @@ namespace La3bni.UI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            StripeConfiguration.ApiKey = configuration.GetSection("Stripe")["SecretKey"];
 
             app.UseAuthentication();
             app.UseAuthorization();

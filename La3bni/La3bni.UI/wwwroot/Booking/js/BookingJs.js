@@ -53,7 +53,7 @@ function onChangeSelectedPeriod(id) {
 
 function addMaxNumOfplayersandChecking() {
     if (document.getElementsByName("maxNum").length == 0) {
-        $("<label name='numOf' style='margin-top:10%' class='control - label'>num of players can join</label><input type='number' value='0' name='maxNum' min='0' max='9' style='width:50%;'  />").insertAfter("#message");
+        $("<label name='numOf' style='margin-top:10%;color:black;padding: 0' class='control - label'>num of players can join</label><input type='number' value='0' name='maxNum' min='0' max='9' style='width:50%;'  />").insertAfter("#message");
 
         document.getElementsByName("maxNum")[0].addEventListener("keypress", function (e) {
             e.preventDefault();
@@ -366,6 +366,28 @@ function updateRateInDb(selRate) {
         }
     });
 }
+
+//function SendBooks() {
+//    var books = [
+//        { id: 1, name: 'khaled' },
+//        { id: 2, name: 'islam' },
+//        { id: 3, name: 'ali' }
+//    ];
+//    books = JSON.stringify(books);
+//    $.ajax({
+//        dataType: "text",
+//        type: "POST",
+//        url: "https://localhost:44379/Booking/GetBooks",
+//        data: { books: books },
+//        success: function (response) {
+//            console.log(response);
+//            //window.location.href = response.redirectToUrl;
+//        },
+//        error: function (req, status, error) {
+//            //console.log(msg);
+//        }
+//    });
+//}
 
 var Confirm = new CustomConfirm();
 checkBooking();

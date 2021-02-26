@@ -1,7 +1,4 @@
-
-
-
-//Search functionality wasn't working cause i'm using ajax request , 
+//Search functionality wasn't working cause i'm using ajax request ,
 //solution was to implement a filter on data recomended and implemented in this post
 //https://stackoverflow.com/questions/46666150/search-is-not-working-in-jquery-autocomplete/46666591
 
@@ -11,7 +8,6 @@ if (!RegExp.escape) {
         return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
     };
 }
-
 
 $.ajax({
     url: '/Home/getPlaygrounds/',
@@ -25,7 +21,7 @@ $.ajax({
     }
 });
 
-var playgrounds; 
+var playgrounds;
 $("#search").autocomplete({
     source: function (request, response) {
         //using the filter
@@ -47,4 +43,14 @@ $("#search").autocomplete({
         $("#search").val(ui.item.label);
         return false; // Prevent the widget from inserting the value.
     },
+});
+
+$(function () {
+    $("#search").on('keypress', function (e) {
+        var keyPressed = e.keyCode || e.which;
+        if (keyPressed === 13) {
+            e.preventDefault();
+            return false;
+        }
+    })
 });
